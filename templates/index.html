@@ -1,0 +1,3117 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light"></html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Qpython3 app.pyA Training Portal</title>
+  <style>
+
+
+  
+ html, body {
+    min-height: 100vh;
+    background: #010b25;   
+    background-attachment: fixed; 
+    background-size: cover;
+}
+
+   #auth .center{
+  background: rgba(255,255,255,0.92);
+  border-radius: 14px;
+  padding: 50px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  width: 520px;
+  margin: 120px auto;
+}
+    :root{
+      --bg-grad-1:#4fa3de; --bg-grad-2:#4bc1bf; --bg-grad-3:#0a075ccb; --bg-grad-4:#55c0c0; --bg-grad-5:#e7f6e6;
+      --card-bg:#ffffff; --text:#333; --muted:#0f0b6c; --btn-grad-1:#dcf0e2; --btn-grad-2:#010e58; --btn-grad-3:#1a9bd3;
+      --border:#e7e7e7; --shadow:rgba(0,0,0,.2); --ok:#050647; --warn:#f59e0b; --err:#ef4444; --link:#156eb6;
+    }
+    [data-theme="dark"]{
+      --card-bg:#16161a; --text:#f3f4f6; --muted:#cbd5e1; --border:#2a2a31; --shadow:rgba(0,0,0,.6);
+      --link:#60a5fa;
+    }
+    *{box-sizing:border-box}
+    /* ===== Quiz Popup Fix ===== */
+/* صندوق البوب أب */
+.popup {
+  background: #ffffff;
+}
+
+/* العنوان */
+.popup h3 {
+  color: #222;
+  margin-top: 0;
+}
+
+/* نص المحتوى */
+.popup p,
+.popup li {
+  color: #333;
+}
+
+/* زر الإغلاق فقط */
+.popup button {
+  color: #fdfafa !important;
+}
+
+
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes gradientShift {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+#welcome, #auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;   /* يخليه بنص الصفحة */
+  margin: 0;           /* نلغي المارجن القديم */
+}
+    @keyframes gradientBG{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+/* ====== Welcome Hero (Landing) ====== */
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+/* خلفية عامة للموقع */
+body {
+  background: radial-gradient(circle at top left, #1e293b, #020617 55%);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* نخلي الـ welcome و auth بالنص */
+#welcome,
+#auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* حاوية الهيرو */
+.welcome-hero {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 16px;
+}
+/* الكارد الرئيسي حق الواجهة */
+.welcome-shell {
+  position: relative;
+  max-width: 880px;
+  width: 100%;
+  padding: 48px 56px;
+  border-radius: 28px;
+
+  
+  background: rgba(7, 12, 28, 0.92); 
+
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.75);
+  color: #f9fafb;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 22px;
+}
+/* إضاءة ديكورية على اليمين */
+.welcome-shell::before {
+  content: "";
+  position: absolute;
+  right: -140px;
+  top: -80px;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.9), rgba(56, 189, 248, 0));
+  opacity: 0.7;
+  filter: blur(4px);
+}
+
+/* الشارة الصغيرة فوق العنوان */
+.welcome-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.65);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #e5e7eb;
+  margin-bottom: 18px;
+}
+
+/* العنوان */
+.welcome-shell h1 {
+  font-size: 34px;
+  line-height: 1.2;
+  margin: 0 0 10px;
+}
+
+.welcome-desc {
+  font-size: 18px;
+  color: #e4e7ee;
+  max-width: 580px;
+  line-height: 1.7;
+  margin: 18px 0 35px;
+  letter-spacing: 0.3px;
+  font-weight: 300;
+  opacity: 0.95;
+}
+
+/* منطقة الأزرار والملاحظة */
+.welcome-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+.start-btn {
+  padding: 12px 26px;
+  border: none;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #1e3a8a, #04205c, #e0e6e4);
+  color: white;
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.4);
+  transition: 0.3s;
+}
+
+.start-btn:hover {
+  transform: translateY(-3px);
+  opacity: 0.95;
+}
+.start-btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.96;
+  box-shadow: 0 16px 40px rgba(37, 99, 235, 0.7);
+}
+
+.welcome-note {
+  font-size: 13px;
+  color: #cbd5f5;
+}
+
+/* بلوك Training Snapshot داخل الكارد فقط */
+.welcome-snapshot {
+  margin-top: 8px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.welcome-snapshot h3 {
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #e5e7eb;
+  margin: 0 0 8px;
+}
+
+.welcome-snapshot ul {
+  padding-left: 18px;
+  margin: 0;
+  font-size: 14px;
+  color: #cbd5f5;
+}
+
+.welcome-snapshot li {
+  margin-bottom: 4px;
+}
+
+/* عشان الفورم حق اللوق إن يظل كارد في النص برضه */
+#auth .center {
+  box-shadow: 0 18px 55px rgba(15, 23, 42, 0.80);
+}
+.welcome-hero {
+  padding-top: 0;
+  margin-top: -10px;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(35px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+/* ===== Uniform Layout for all tabs except CTFL ===== */
+.tab {
+  width: min(900px, 90%);
+  margin: 0 auto;
+  background: var(--card-bg);
+  border-radius: 18px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+}
+
+/* تنسيق موحّد لعناوين الأقسام داخل التبويبات */
+.tab h2 {
+  text-align: left;
+  margin-bottom: 12px;
+  color: var(--text);
+}/* ===== Tool cards unified size ===== */
+#tools .cards,
+#resources .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  justify-content: center;
+}
+
+#tools .card,
+#resources .card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+[data-theme="dark"] #tools .card,
+[data-theme="dark"] #resources .card {
+  background: rgba(22, 22, 26, 0.95);
+}
+
+#tools .card:hover,
+#resources .card:hover {
+  transform: translateY(-5px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.start-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255,255,255,0.3);
+}
+
+    .stack{display:grid; gap:14px}
+    .center{display:flex; flex-direction:column; align-items:center; text-align:center}
+    .row{display:flex; align-items:center; gap:10px}
+    .between{display:flex; align-items:center; justify-content:space-between; gap:10px}
+
+    h1{margin:8px 0 0 0; font-size:20px}
+    h2{margin:12px 0; font-size:18px}
+    p.muted{color:var(--muted); margin:0}
+
+    input, textarea, select{
+      width:100%; padding:12px; border:1px solid var(--border); border-radius:10px; background:transparent; color:var(--text);
+    }
+    textarea{resize:vertical; min-height:90px}
+    .btn{
+      padding:10px 14px; border:none; border-radius:10px; cursor:pointer; color:#fff;
+      background:linear-gradient(45deg,var(--btn-grad-1),var(--btn-grad-2),var(--btn-grad-3));
+    }
+    .btn.ghost{background:transparent; color:var(--text); border:1px solid var(--border)}
+    .btn.small{padding:6px 10px; border-radius:8px; font-size:13px}
+    .btn.ok{background:linear-gradient(45deg,#092884,#2ecfc7)}
+    .btn.warn{background:linear-gradient(45deg,#00005b,#159ea2)}
+
+    .tabs{margin-top:12px; display:flex; flex-wrap:wrap; gap:8px}
+    .tab-btn{
+      padding:10px 12px; border:none; border-radius:10px; cursor:pointer; background:#eee; color:#111;
+    }
+    [data-theme="dark"] .tab-btn{ background:#222; color:#f3f4f6; }
+    .tab-btn.active{ color:#fff; background:linear-gradient(45deg,var(--btn-grad-1),var(--btn-grad-2),var(--btn-grad-3)); }
+    .tab{ display:none; animation:fade .28s ease }
+    .tab.active{ display:block }
+    @keyframes fade{from{opacity:.0; transform:translateY(6px)} to{opacity:1; transform:translateY(0)}}
+
+    ul.list{list-style:none; padding:0; margin:6px 0 0}
+    ul.list li{
+      padding:10px 12px; border:1px solid var(--border); border-radius:10px; margin-bottom:8px;
+      display:flex; justify-content:space-between; align-items:flex-start; gap:10px
+    }
+    .chip{font-size:12px; padding:4px 8px; border-radius:999px; border:1px solid var(--border); color:var(--muted)}
+
+    .alert{display:none; padding:10px 12px; border-radius:10px; border:1px solid var(--border); margin-top:8px;}
+    .alert.show{display:block}
+    .alert.ok{background:rgba(34,197,94,.1); border-color:#16a34a}
+    .alert.err{background:rgba(239,68,68,.12); border-color:#b91c1c}
+    .alert.warn{background:rgba(245,158,11,.12); border-color:#b45309}
+
+    .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px}
+    .card{border:1px solid var(--border); border-radius:16px; padding:14px; display:grid; gap:8px}
+    .card img{width:42px; height:42px}
+    a{ color:var(--link); text-decoration:none }
+   /* ==== CTFL Custom Cards ==== */
+#ctfl .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+#ctfl .card {
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+[data-theme="light"] #ctfl .card {
+  background: rgba(255, 255, 255, 0.85);
+  color: #000505;
+}
+
+#ctfl .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 35px rgba(24, 201, 241, 0.3);
+}
+
+#ctfl .card h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#ctfl .card p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="light"] #ctfl .card p {
+  color: #0b0106;
+}
+/* ======= Popup (CTFL Details) ======= */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 500;
+}
+
+.popup {
+  background: rgba(255, 255, 255, 0.95);
+  color: #111;
+  border-radius: 16px;
+  padding: 30px;
+  width: min(600px, 90%);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+  position: relative;
+}
+
+[data-theme="dark"] .popup {
+  background: rgba(30, 30, 30, 0.95);
+  color: #f3f4f6;
+}
+
+#ctfl .card h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+.popup p {
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+.popup button {
+  margin-top: 20px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(45deg, #0d3a10, #040a64);
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.popup button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* ==== CTFL Popup Modal ==== */
+.popup-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 500;
+}
+
+/* ======= Uniform Tutorial Buttons ======= */
+.tutorial-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  background: linear-gradient(45deg, #0d91a6, #053059, #07538d);
+  color: white;
+  transition: 0.3s;
+  text-decoration: none;
+}
+.tutorial-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255,255,255,0.3);
+}
+.popup-content {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 30px;
+  width: min(600px, 90%);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  color: var(--text);
+  animation: fadeIn 0.4s ease;
+}
+
+.popup-content h2 {
+  text-align: center;
+  margin-top: 0;
+  color: var(--btn-grad-3);
+}
+
+.popup-content ul {
+  text-align: left;
+  margin: 15px 0;
+  padding-left: 20px;
+}
+
+.popup-content li {
+  margin-bottom: 8px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* ===== CTFL tab scoped fixes (won't affect other tabs) ===== */
+#ctfl .section-card{
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: 0 8px 24px var(--shadow);
+  position: relative;
+  z-index: 1;
+}
+
+/* زر View Certification Info في الوسط وبنفس شكل أزرارك */
+#ctfl .center .btn{
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-size: 15px;
+  background: linear-gradient(45deg, #055081, #08045f, #0cb3d0);
+  color: #fff;
+  border: 0;
+}
+
+/* شبكة الكروت داخل CTFL فقط (موجودة مسبقًا – نحافظ عليها ونضبط المسافات) */
+#ctfl .cards{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-top: 14px;
+}
+
+#ctfl .card{
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 18px;
+  background: rgba(255,255,255,.85);
+}
+[data-theme="dark"] #ctfl .card{ background: rgba(22,22,26,.95); }
+
+/* تأكد أن البوب-أب الجانبي فوق كل شيء ولا يغطي الصفحة عند إغلاقه */
+.side-popup-overlay{ z-index: 9999; }
+#ctfl .section-card h2 {
+  margin-bottom: 10px;
+}
+#ctfl .section-card p.muted {
+  margin-bottom: 20px;
+}/* 🎨 إصلاح ألوان النصوص في الوضع الداكن */
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+  color: #f3f4f6 !important;
+  background: rgba(30, 30, 30, 0.9) !important;
+  border-color: #444 !important;
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: #aaa !important;
+}
+
+[data-theme="dark"] h2,
+[data-theme="dark"] p,
+[data-theme="dark"] label,
+[data-theme="dark"] strong {
+  color: #f3f4f6 !important;
+}/* 🌙 تحسين عرض العناصر المعبّية داخل Test Cases و Bug Reports */
+[data-theme="dark"] ul.list li {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  color: #f3f4f6;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* العناوين والنصوص الداخلية (مثل ID, Module, Expected...) */
+[data-theme="dark"] ul.list li strong {
+  color: #ffffff;
+}
+
+[data-theme="dark"] ul.list li .muted,
+[data-theme="dark"] ul.list li span,
+[data-theme="dark"] ul.list li div {
+  color: #d1d5db;
+}/* ===== تعديل ألوان العناوين داخل التابات في الثيم الداكن ===== */
+[data-theme="dark"] #dashboard h1,
+[data-theme="dark"] #dashboard h2,
+[data-theme="dark"] #dashboard h3 {
+  color: #f3f4f6 !important;
+}
+
+/* ===== تعديل النصوص داخل التابات ===== */
+[data-theme="dark"] #dashboard p,
+[data-theme="dark"] #dashboard label,
+[data-theme="dark"] #dashboard strong {
+  color: #dcdcdc !important;
+}
+
+/* ===== صفحة Login تبقى نصوصها غامقة على كارد أبيض ===== */
+[data-theme="dark"] #auth h1,
+[data-theme="dark"] #auth h2,
+[data-theme="dark"] #auth label,
+[data-theme="dark"] #auth p {
+  color: #111 !important;
+}
+
+/* الأزرار داخل القائمة */
+[data-theme="dark"] ul.list li .btn.small.ok {
+  background: linear-gradient(45deg, #010153, #0b91b3);
+}
+[data-theme="dark"] ul.list li .btn.small.warn {
+  background: linear-gradient(45deg, #1299c2, #020651);
+}
+
+/* تحسين تباين النص في حالة الـ Light Mode برضو */
+[data-theme="light"] ul.list li {
+  background: rgba(255, 255, 255, 0.95);
+  color: #111;
+}/*  تحسين وضوح عناوين الأقسام داخل What We Learned */
+[data-theme="dark"] #learned h3 {
+  color: #ffffff !important;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+  margin-top: 20px;
+}
+
+[data-theme="dark"] #learned h2 {
+  color: #f9f9f9 !important;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] #learned p {
+  color: #d6d6d6;
+}
+[data-theme="dark"] #learned p {
+  color: #d6d6d6;
+}
+
+/* الوضع الداكن لشاشة اللوقين بدون لمس لون زر Login */
+[data-theme="dark"] #auth input,
+[data-theme="dark"] #auth textarea {
+  background: #111;
+  color: #fff;
+  border-color: #555;
+}
+
+[data-theme="dark"] #auth input::placeholder,
+[data-theme="dark"] #auth textarea::placeholder {
+  color: #ccc;
+}
+
+/* زر Login يظل نفس التدرّج الأزرق بدون تغيير */
+#auth .btn {
+  background: linear-gradient(135deg, #01185b, #0a528d, #9bcfe3);
+  color: #fff;
+  border: none;
+}
+
+/* زر Register / Back الشفّاف */
+#auth .btn.ghost {
+  background: #ffffff;
+  color: #666;
+  border: 1px solid #ccc;
+}
+
+/* ثيم الوضع الداكن لزر Register فقط */
+[data-theme="dark"] #auth .btn.ghost {
+  background: #333;
+  color: #ddd;
+  border: 1px solid #555;
+}
+/* 🌿 تخصيص لون زر Login فقط */
+#auth .btn:not(.ghost) {
+  background: linear-gradient(135deg, #01185b, #0a528d, #9bcfe3);
+  border: none;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  border-radius: 8px;
+  transition: 0.3s ease;
+}
+
+#auth .btn:not(.ghost):hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(4, 104, 141, 0.5);
+}
+#auth {
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding-top:120px;
+}
+
+#auth .center{
+  background: rgba(255,255,255,0.92);
+  border-radius: 20px;
+  padding: 120px 110px;
+  box-shadow: 0 8px 30px rgba(94, 179, 196, 0.15);
+  width: 800px;
+}
+.chip.review {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  display: inline-block;
+  background:#999; /* default for pending */
+  color:white;
+}
+
+/* dynamic colors using attribute selectors */
+.chip.review[data-status="Approved"] { background: #28a745; }  /* green */
+.chip.review[data-status="Rejected"] { background: #dc3545; }  /* red */
+.chip.review[data-status="Pending"]  { background: #6c757d; }  /* gray */
+  
+  /* === Unified Side Review Popup === */
+.side-review-overlay{
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.55); backdrop-filter:blur(4px);
+  display:flex; justify-content:flex-end; align-items:stretch;
+  z-index:9999; animation:srFade .2s ease;
+}
+.side-review{
+  width:420px; max-width:90%;
+  background:var(--card-bg); color:var(--text);
+  border-top-left-radius:20px; border-bottom-left-radius:20px;
+  box-shadow:-6px 0 24px rgba(0,0,0,.35);
+  padding:22px; overflow:auto; animation:srSlide .28s ease;
+}
+.sr-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;border-bottom:1px solid var(--border);padding-bottom:6px}
+.sr-close{background:none;border:0;font-size:22px;cursor:pointer;color:var(--text)}
+.sr-group{margin:12px 0}
+.sr-actions{display:flex;gap:8px; margin-top:14px}
+@keyframes srFade{from{opacity:0}to{opacity:1}}
+@keyframes srSlide{from{transform:translateX(100%)}to{transform:translateX(0)}}
+
+
+
+
+.tabs {
+  display: flex;
+  justify-content: center;   /* يخليهم وسط */
+  gap: 10px;                 /* مسافة بين الأزرار */
+  margin-top: 20px;          /* ينزلهم شوي تحت الهيدر */
+}
+
+.tab-btn {
+  min-width: 130px;
+  text-align: center;
+}
+div.between {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 900px;   /* نفس عرض الكارد */
+  margin: 0 auto 20px auto; /* وسط الصفحة وتحتها مسافة */
+  padding: 0 10px;
+}
+#hello {
+  font-size: 36px;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+/* ======== Info Card (Light Theme) ======== */
+#infoCard {
+  max-width: 900px;
+  margin: 25px auto;
+  padding: 105px;
+  background: #f4f3f8;
+  border-radius: 20px;
+  box-shadow:
+    8px 8px 20px rgba(0,0,0,0.15),
+    -8px -8px 20px rgba(41, 172, 212, 0.7);
+  text-align: center;
+  transition: .3s;
+}
+
+#infoCard h2 {
+  margin-bottom: 15px;
+  font-size: 28px;
+  font-weight: 600;
+  color: #0f0d0d;
+}
+
+#infoCard p {
+  font-size: 20px;
+  line-height: 1.8;
+  color: #0f0d0d;
+  max-width: 750px;
+  margin: auto;
+}
+
+#infoCard .note-box {
+  margin-top: 25px;
+  padding: 12px 18px;
+background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  border-radius: 12px;
+  border-left: 5px solid #29b0ce;
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #111;
+}
+
+/* ======== Dark Theme ======== */
+[data-theme="dark"] #infoCard {
+  background: #0b1220;
+  box-shadow:
+    8px 8px 20px rgba(0,0,0,0.7),
+    -8px -8px 20px rgba(23, 77, 152, 0.4);
+}
+
+[data-theme="dark"] #infoCard h2,
+[data-theme="dark"] #infoCard p {
+  color: #e6e6e6;
+}
+
+[data-theme="dark"] #infoCard .note-box {
+  background: #151d2c;
+  border-left-color: #021d63;
+  color: #e6e6e6;
+}
+/* توحيد لون النص داخل كل التبويبات */
+#ctl, #tools, #resources, #tc, #br {
+    color: #111 !important;
+}
+
+#ctl p, #tools p, #resources p, #tc p, #br p,
+#ctl h2, #tools h2, #resources h2, #tc h2, #br h2 {
+    color: #111 !important;
+}/* ضبط لون النص في Tools و Resources */
+#files, #resources {
+    color: #111 !important;
+}
+
+#files p, #resources p,
+#files h2, #resources h2,
+#files h3, #resources h3,
+#files li, #resources li {
+    color: #111 !important;
+}
+
+/* نفس ستايل أول تاب: كل النصوص سوداء في تبويب About CTFL */
+#ctfl h2,
+#ctfl h3,
+#ctfl p,
+#ctfl li {
+  color: #111 !important;
+}
+/* QUIZ POPUP DESIGN */
+/* ===== خلفية تغطي الشاشة مع بلور ===== */
+.side-popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999;
+    animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* ===== صندوق البوب أب ===== */
+.side-popup {
+    background: rgba(255,255,255,0.96);
+    padding: 65px 55px;
+    border-radius: 25px;       /* حواف ألطف */
+    width: 560px;              /* يكبّر العرض */
+    box-shadow: 0 20px 45px rgba(0,0,0,0.25);
+}
+
+@keyframes popupIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+}
+
+/* ===== عنوان السؤال ===== */
+.side-popup h2 {
+    font-size: 1.35rem;
+    margin-bottom: 20px;
+    color: #102c5b;
+    font-weight: 700;
+}
+
+/* ===== أزرار الخيارات ===== */
+.quiz-option {
+    background: linear-gradient(135deg, #01185b, #0a528d, #9bcfe3);
+    color: #fff;
+    border: none;
+    padding: 14px 22px;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 14px;
+    transition: 0.25s ease;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.18);
+}
+
+.quiz-option:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+}
+.quiz-option:hover {
+    background: #dfe9ff;
+    border-color: #b9ceff;
+    transform: scale(1.03);
+}
+
+/* ===== الألوان بعد الإجابة ===== */
+.correct {
+    background: #d6ffda !important;
+    border-color: #35b848 !important;
+    color: #0b6a1b !important;
+}
+
+.wrong {
+    background: #ffe1e1 !important;
+    border-color: #ff6b6b !important;
+    color: #a30000 !important;
+}
+
+/* ===== أزرار التنقل والإغلاق ===== */
+.side-popup button,
+.close-btn {
+    background: linear-gradient(90deg, #042248, #0d0f46);
+    color: #fff;
+    border-radius: 8px;
+    padding: 8px 8px;
+    border: none;
+}
+
+.side-popup button:hover,
+.close-btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.22);
+}
+.quiz-question-title {
+    color: #013a80;
+    font-weight: 700;
+    font-size: 1.3rem;
+    text-align: center;
+    background: linear-gradient(90deg, #f5f8ff, #ffffff);
+    padding: 10px 0;
+    border-radius: 8px;
+}
+.quiz-main-title {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: #013a80;
+    text-align: center;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+.quiz-btn {
+    font-size: 19px !important;   /* يصغّر الكتابة */
+    padding: 6px 10px !important; /* يصغّر المحيط حول النص */
+}
+.close-btn {
+    padding: 6px 20px !important;    /* يصغّر حجم الزر */
+    font-size: 14px !important;      /* يصغّر الكتابة */
+    border-radius: 6px !important;   /* يخليه أنعم */
+}
+.fixed-logo {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+
+  width: 180px;          /* حجم مناسب */
+  max-width: 35vw;       /* لا يكبر زيادة */
+  height: auto;
+
+  z-index: 9999;
+  pointer-events: none;
+
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* للشاشات الصغيرة (جوال / تصغير قوي) */
+@media (max-width: 768px) {
+  .fixed-logo {
+    width: 90px;
+    bottom: 16px;
+    left: 16px;
+    opacity: 0.85;       /* تخفيف بسيط */
+  }
+}
+
+/* إذا صغرت الشاشة جدًا */
+@media (max-width: 480px) {
+  .fixed-logo {
+    display: none;       /* اختياري: يخفيه نهائيًا */
+  }
+}
+
+/* لما نبي نخفيه */
+.fixed-logo.hide {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.ctfl-quiz-box {
+  margin-top: 35px;
+  padding: 28px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+.ctfl-quiz-box h3 {
+  margin-bottom: 12px;
+  color: #013a88;
+  font-weight: 700;
+}
+
+.ctfl-quiz-box h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #013a88;
+}
+.ctfl-quiz-card {
+  margin-top: 30px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+.ctfl-quiz-box button {
+  background: linear-gradient(135deg, #01185b, #0a528d, #9bcfe3);
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  padding: 10px 26px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+}.ctfl-quiz-box button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+  z-index: 9998;
+}
+
+.popup {
+  position: relative;
+  z-index: 9999;
+  background: #ffffff !important;
+  color: #111 !important;
+  opacity: 1 !important;
+  filter: none !important;
+  .popup * {
+  color: #111 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  filter: none !important;
+}
+}
+/* سؤال الكويز – لايت */
+.quiz-question {
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #0a3a80;
+}
+
+/* سؤال الكويز – دارك */
+[data-theme="dark"] .quiz-question {
+  color: #070c1a;
+}.scroll-to-quiz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* يوسّط أفقيًا */
+  justify-content: center;
+  text-align: center;
+  margin: 16px 0;
+  cursor: pointer;
+}
+  </style>
+</head>
+<body>
+<img src="../static/images/quality-logo.png"
+     alt="Quality Logo"
+     class="fixed-logo"
+     id="fixedLogo">
+ <!-- ====== Welcome Page ====== -->
+<div id="welcome" class="welcome-hero">
+  <div class="welcome-shell">
+<div class="welcome-badge">
+  
+</div>
+
+<h1>Learn, Practice, and Assess Your QA Skills.</h1>
+<p class="welcome-desc">
+Create test cases, report bugs, and check your QA knowledge through a built-in quiz — all in one training portal.
+
+</p>
+
+<div class="welcome-actions">
+  <button class="start-btn" onclick="closeWelcome()">Let’s Start</button>
+  <span class="welcome-note"></span>
+</div>
+
+    <div class="welcome-snapshot">
+      <h3>Training Snapshot</h3>
+      <ul>
+        <li>Designing clear, reviewable Test Cases</li>
+        <li>Writing professional Bug Reports</li>
+         <li>QA knowledge Quiz</li>
+        <li>Simulating admin review &amp; feedback</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+<!-- ====== End Welcome Page ====== -->
+  <!-- Auth -->
+  <div id="auth" class="container stack" style="display:none">
+    <div class="center" id="loginView">
+<h2 style="
+    font-size:38px;
+    font-weight:700;
+    margin-bottom:35px;
+    color:#041c3b;
+">
+    Welcome back!
+</h2>
+    <p style="
+    font-size:18px;
+    color:#777;
+    margin-top:-10px;
+    margin-bottom:25px;
+    text-align:center;
+">
+    Your QA training journey starts here
+</p>
+      <input id="loginEmail" type="email" placeholder="Enter your email" />
+   <input id="loginPass" type="password" placeholder="Password (8 digits)" />
+      <div class="row">
+        <button class="btn" onclick="login()">Login</button>
+        <button class="btn ghost" onclick="showRegister()">Register</button>
+      </div>
+      <div id="authAlert" class="alert"></div>
+    </div>
+
+    <div class="center" id="registerView" style="display:none">
+     <h2 style="
+    font-size:38px;
+    font-weight:700;
+    margin-bottom:25px;
+    color:#041c3b;
+    text-align:center;
+">
+    Register
+</h2>
+      <input id="regName" type="text" placeholder="Name" />
+      <input id="regEmail" type="email" placeholder="Email" />
+    <input id="regPass" type="password" placeholder="Password (8 digits)" />
+      <div class="row">
+        <button class="btn" onclick="register()">Create Account</button>
+        <button class="btn ghost" onclick="showLogin()">Back</button>
+      </div>
+      <div id="regAlert" class="alert"></div>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dashboard" class="container stack" style="display:none">
+    <div class="between">
+    <h2 id="hello">Signed in</h2>
+    <div class="row">
+        <button class="btn small" onclick="toggleInfo()">Info</button>
+        <button class="btn small warn" onclick="toggleTheme()">Theme</button>
+        <button class="btn small warn" onclick="logout()">Logout</button>
+    </div>
+</div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+  <button class="tab-btn " data-tab="learned" onclick="openTab(event,'learned')">What We Learned</button>
+  <button class="tab-btn" data-tab="ctfl" onclick="openTab(event,'ctfl')">About CTFL</button>
+  <button class="tab-btn" data-tab="files" onclick="openTab(event,'files')">Tools</button>
+  <button class="tab-btn" data-tab="resources" onclick="openTab(event,'resources')">Resources</button>
+  <button class="tab-btn" data-tab="tc" onclick="openTab(event,'tc')">Test Cases</button>
+  <button class="tab-btn" data-tab="br" onclick="openTab(event,'br')">Bug Reports</button>
+</div>
+<div id="infoCard" class="tab active">
+  
+  <p>
+    This portal allows you to practice real QA tasks such as writing test
+    cases, reporting bugs, accessing learning resources, and exploring QA tools.
+    Assess your QA knowledge using the built-in quiz.
+     <br>Use the tabs above to navigate between sections.
+  </p>
+
+  <div class="note-box">
+    <strong>Note:</strong>
+    During the training period, we pause the QA courses while working on
+    real projects to focus on applying what we've learned directly in
+    practical tasks.
+  </div>
+</div>
+
+ 
+<!-- Test Cases -->
+<div id="tc" class="tab ">
+  <h1>Test Cases</h1>
+  <p class="muted">A test case defines how to validate a specific feature of the system.</p>
+  <div class="stack" style="gap:8px; margin-bottom:10px">
+
+    <input id="tcID" placeholder="ID"/>
+    <input id="tcModule" placeholder="Module"/>
+    <input id="tcActor" placeholder="Actor"/>
+    <input id="tcScenario" placeholder="Test Scenario"/>
+    <textarea id="tcSteps" placeholder="Steps"></textarea>
+
+    <select id="tcType">
+      <option value="Positive">Case Type: Positive</option>
+      <option value="Negative">Case Type: Negative</option>
+    </select>
+
+    <input id="tcExpected" placeholder="Expected Result"/>
+    <input id="tcActual" placeholder="Actual Result"/>
+
+    <select id="tcStatus">
+      <option value="Pass">Status: Pass</option>
+      <option value="Fail">Status: Fail</option>
+    </select>
+
+    <button class="btn" onclick="addTestCase()">Add Test Case</button>
+  </div>
+
+  <div id="tcAlert" class="alert"></div>
+  <ul id="tcList" class="list"></ul>
+</div>
+
+    <!-- Bug Reports -->
+    <div id="br" class="tab">
+      <h1>Bug Reports</h1>
+      <p class="muted">A bug report documents a problem in the system and includes steps, expected vs actual results, and evidence.</p>
+      <div class="stack">
+        <div class="row" style="gap:8px; flex-wrap:wrap">
+          <input id="brTitle" placeholder="Bug title"/>
+          <!-- CHANGED: Severity -> Priority (no Critical) -->
+          <select id="brPriority" style="max-width:180px">
+            <option value="High">Priority: High</option>
+            <option value="Medium">Priority: Medium</option>
+            <option value="Low">Priority: Low</option>
+          </select>
+        </div>
+        <textarea id="brSteps" placeholder="Steps to Reproduce"></textarea>
+        <div class="row" style="gap:8px">
+          <input id="brExpected" placeholder="Expected result"/>
+          <input id="brActual" placeholder="Actual result"/>
+        </div>
+        <button class="btn" onclick="addBugReport()">Add Bug Report</button>
+      </div>
+      <div id="brAlert" class="alert"></div>
+      <ul id="brList" class="list"></ul>
+    </div>
+    <!--  Tools -->
+    <div id="files" class="tab">
+      <h1> Tools</h1>
+      <div class="cards">
+        <div class="card">
+          <img src="https://cdn-icons-png.flaticon.com/512/5968/5968358.png" alt="Selenium"/>
+          <strong>Selenium</strong>
+          <p class="muted">Free, multi-language browser automation framework.</p>
+          <a href="https://www.selenium.dev/" target="_blank">Docs</a>
+        </div>
+        <div class="card">
+          <img src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png" alt="Playwright"/>
+          <strong>Playwright</strong>
+          <p class="muted">End-to-end testing framework supporting multiple browsers.</p>
+          <a href="https://playwright.dev" target="_blank">Docs</a>
+        </div>
+        <div class="card">
+          <img src="https://cdn-icons-png.flaticon.com/512/906/906324.png" alt="Postman"/>
+          <strong>Postman</strong>
+          <p class="muted">Design, test, and document APIs easily with collections.</p>
+          <a href="https://www.postman.com/" target="_blank">Docs</a>
+      </div>
+         <!--  NEW: JMeter -->
+    <div class="card">
+      <img src="https://jmeter.apache.org/images/jmeter_square.png" alt="JMeter" />
+      <strong>JMeter</strong>
+      <p class="muted">Performance & load testing tool for measuring system speed and stability.</p>
+      <a href="https://jmeter.apache.org/" target="_blank">Docs</a>
+    </div>
+      <!--  NEW: Cypress -->
+<div class="card">
+  <img src="https://raw.githubusercontent.com/cypress-io/cypress/develop/assets/cypress-logo-dark.png" 
+       alt="Cypress" style="width:40px; height:auto;" />
+  <strong>Cypress</strong>
+  <p class="muted">Front-end E2E testing tool with real-time test runner and automatic waits.</p>
+  <a href="https://www.youtube.com/watch?v=AER01beCJ5c&list=PLJ2FoWouEU2wk6xLWf1vABC_bpl-njsiZ"
+     target="_blank">Docs</a>
+</div>
+
+<div class="card">
+  <img src="https://logos-world.net/wp-content/uploads/2021/02/Jira-Emblem.png"
+       alt="Jira" style="width:40px; height:auto;" />
+  <strong>Jira</strong>
+  <p class="muted">Agile project management, issue tracking, and sprint planning.</p>
+  <a href="https://www.youtube.com/watch?v=exKVndbrewM"
+     target="_blank">Docs</a>
+</div>
+    </div>
+    </div>
+    <!-- Resources -->
+    <div id="resources" class="tab">
+      <h1>Resources</h1>
+      <ul class="list">
+        <li><a href="https://testing.googleblog.com/" target="_blank">Google Testing Blog</a></li>
+        <li><a href="https://www.ministryoftesting.com/" target="_blank">Ministry of Testing</a></li>
+        <li><a href="https://www.guru99.com/software-testing.html" target="_blank">Guru99 – Software Testing</a></li>
+        <li><a href="https://www.istqb.org/" target="_blank">ISTQB Official</a></li>
+        <li><a href="https://hackerone.com/hacktivity/overview?queryString=disclosed%3Atrue&sortField=latest_disclosable_activity_at&sortDirection=DESC&pageIndex=0"
+               target="_blank">HackerOne Hacktivity</a></li>
+      </ul>
+    </div>
+<!-- What We Learned -->
+<div id="learned" class="tab">
+  <h1>What We Learned</h1>
+
+  <h3>Test Cases</h3>
+  <p>A test case is a document that defines how to test a specific part of the system to ensure it works correctly. 
+     We learned about components like ID, steps, expected result, actual result, and status (Pass/Fail).</p>
+  <ul class="list">
+    <li>Positive & Negative Scenarios</li>
+    <li>Preconditions and Test Data</li>
+    <li>Execution and Validation</li>
+  </ul>
+  <a class="tutorial-btn" href="https://youtu.be/MMa4AVdBCZY?si=A7XF5eA3qs3g-ysY" target="_blank">▶ Watch Test Case Tutorial</a>
+  <div class="row" style="gap:10px; margin-top:10px; flex-wrap:wrap;">
+  <button class="tutorial-btn" onclick="openLearnPopup('tc_detail')"> Detailed Explanation</button>
+  <button class="tutorial-btn" onclick="openLearnPopup('tc_example')"> Example</button>
+</div>
+
+  <h3>Bug Reports</h3>
+  <p>We practiced how to report bugs clearly and reproducibly. 
+     A bug report includes title, steps to reproduce, expected vs actual result, environment, and evidence.</p>
+  <ul class="list">
+    <li>Bug Life Cycle: New → Assigned → Open → Fixed → Retest → Closed</li>
+    <li>Priority vs Severity classifications</li>
+    <li>Reproducibility ratio and attachments</li>
+  </ul>
+  <a class="tutorial-btn" href="https://youtu.be/ufiRHIY5ReY?si=K5VsCWlY0rQgpC10" target="_blank">▶ Watch Bug Report Guide</a>
+  <div class="row" style="gap:10px; margin-top:10px; flex-wrap:wrap;">
+  <button class="tutorial-btn" onclick="openLearnPopup('br_detail')"> Detailed Explanation</button>
+  <button class="tutorial-btn" onclick="openLearnPopup('br_example')"> Example</button>
+</div>
+
+  <h3>Selenium</h3>
+  <p>Selenium is an open-source framework for browser automation. 
+     It supports multiple languages (Java, Python, C#) and integrates with Jenkins, Docker, and more.</p>
+  <ul class="list">
+    <li>Advantages: Free, Cross-Browser, Multi-Language, CI/CD friendly</li>
+    <li>Disadvantages: Web-only, requires coding, no built-in reports</li>
+  </ul>
+  <a class="tutorial-btn" href="https://youtu.be/IvyECQmuBU0?si=VlVSQbXd2I5JzuXp" target="_blank">▶ Watch Selenium Tutorial</a>
+
+  <h3>Playwright</h3>
+  <p>Playwright is a modern end-to-end testing tool that supports multiple browsers, mobile emulation, and parallel testing.
+     It’s more reliable for modern web apps compared to Selenium.</p>
+     
+  <ul class="list">
+    <li>Cross-browser support (Chromium, Firefox, WebKit)</li>
+    <li>Powerful selectors and auto-waiting</li>
+    <li>API testing integration</li>
+  </ul>
+ <a class="tutorial-btn" href="https://www.youtube.com/playlist?list=PLhW3qG5bs-L9sJKoT1LC5grGT77sfW0Z8" target="_blank">
+    ▶Watch Playwright Tutorial
+</a>
+  <h3>Postman</h3>
+  <p>Postman is a collaboration platform for API development. 
+     It allows creating collections, testing endpoints, and automating requests.</p>
+  <ul class="list">
+    <li>Design and test APIs with collections</li>
+    <li>Use environments and variables</li>
+    <li>Monitor APIs for uptime</li>
+  </ul>
+  <a class="tutorial-btn" href="https://www.postman.com/" target="_blank">▶ Watch Postman Official Tutorial</a>
+  <a class="tutorial-btn" href="https://www.youtube.com/playlist?list=PLJ2FoWouEU2yPMIBTGsMRvxjEevIlMi3F" target="_blank">▶ Watch Postman Tutorial Playlist</a>
+  <h3>JMeter</h3>
+<p>JMeter is a powerful open-source tool used for performance and load testing.  
+   It helps QA engineers measure system speed, stability, and scalability before production deployment.</p>
+
+<ul class="list">
+  <li>Thread Group configuration (users, ramp-up, loop count)</li>
+  <li>HTTP Samplers and logic controllers</li>
+  <li>Performance metrics (Response Time, Throughput, Errors %)</li>
+  <li>Load Test vs Stress Test vs Spike Test</li>
+  <li>Viewing and analyzing results with “View Results Tree”</li>
+</ul>
+<a class="tutorial-btn" 
+   href="https://youtube.com/playlist?list=PLUDwpEzHYYLs33uFHeIJo-6eU92IoiMZ7&si=BQLMMidkVVmGBqDt" 
+   target="_blank">
+   ▶ Watch JMeter Tutorial
+</a>
+<h3>Cypress</h3>
+<p>Cypress is a front-end end-to-end (E2E) testing tool that provides real-time test runner, 
+   instant feedback, and automatic waits without the need for manual timeouts.</p>
+
+<ul class="list">
+  <li>Real-time test execution with instant feedback</li>
+  <li>Automatic waits (no need for manual timeouts)</li>
+  <li>DOM interaction and UI validation</li>
+  <li>Powerful selector engine</li>
+  <li>Easy debugging with time-travel snapshots</li>
+</ul>
+
+<a class="tutorial-btn"
+   href="https://www.youtube.com/watch?v=AER01beCJ5c&list=PLJ2FoWouEU2wk6xLWf1vABC_bpl-njsiZ"
+   target="_blank">
+   ▶ Watch Cypress Tutorial
+</a>
+<h3>Jira</h3>
+<p>Jira is an agile project management tool used for issue tracking, sprint planning, 
+   and team workflow management throughout the development lifecycle.</p>
+
+<ul class="list">
+  <li>Agile project management basics</li>
+  <li>Creating tasks, bugs, and user stories</li>
+  <li>Sprint planning and backlog management</li>
+  <li>Tracking workflow and issue lifecycle</li>
+  <li>Team collaboration and progress monitoring</li>
+</ul>
+
+<a class="tutorial-btn"
+   href="https://www.youtube.com/watch?v=exKVndbrewM"
+   target="_blank">
+   ▶ Watch Jira Tutorial
+</a>
+</div>
+</div>
+</div><!-- About the CTFL Certification -->
+<div id="ctfl" class="tab">
+  <div class="section-card">
+    <h1>About the CTFL Certification</h1>
+    <p class="muted">This section provides a detailed explanation of the six CTFL chapters covered during training.</p>
+<div class="center" style="margin: 16px 0;">
+  <button class="btn" onclick="openCtflInfo()"> View Certification Info</button>
+</div>
+<div class="scroll-to-quiz" onclick="scrollToQuiz()">
+  <span>Scroll down to get your quiz</span>
+  <div class="arrow">↓</div>
+</div>
+      <!-- Chapter 1 -->
+      <div class="card">
+        <h3>Chapter 1 – Fundamentals of Testing</h3>
+        <p>
+          This chapter introduces the <strong>importance of software testing</strong> and explains how it helps identify defects early,
+          improve quality, and ensure products meet user expectations.
+        </p>
+        <p>
+          It differentiates between <strong>testing</strong> (finding defects) and <strong>debugging</strong> (fixing them), while highlighting
+          the roles of verification and validation.
+        </p>
+        <p>
+          It also discusses the <strong>Seven Testing Principles</strong> — such as early testing, defect clustering, and the pesticide paradox —
+          which guide testers toward effective quality assurance practices.
+        </p>
+      </div>
+
+      <!-- Chapter 2 -->
+      <div class="card">
+        <h3>Chapter 2 – Testing Throughout the SDLC</h3>
+        <p>
+          This chapter shows how testing integrates into every phase of the <strong>Software Development Life Cycle (SDLC)</strong>,
+          from requirements to maintenance, promoting the <strong>Shift-Left</strong> mindset.
+        </p>
+        <p>
+          It explains key <strong>development models</strong> — Waterfall, V-Model, Agile, and DevOps — and how testing adapts to each.
+        </p>
+        <p>
+          You’ll also learn about the <strong>four test levels</strong>: Component, Integration, System, and Acceptance, 
+          as well as <strong>test types</strong> like functional, non-functional, structural, and regression testing.
+        </p>
+      </div>
+      <!-- Chapter 3 -->
+      <div class="card">
+        <h3>Chapter 3 – Test Process</h3>
+        <p>
+          This chapter focuses on the structured <strong>testing workflow</strong> that ensures consistency and traceability.
+        </p>
+        <p>
+          It includes six main activities: <strong>Planning, Monitoring, Analysis, Design, Implementation, Execution, and Completion</strong>.
+          Each step helps define what to test, how to test it, and how to measure success.
+        </p>
+        <p>
+          The use of <strong>Entry and Exit Criteria</strong> ensures that testing starts and ends at the right time, 
+          based on clear quality goals.
+        </p>
+      </div>
+      <!-- Chapter 4 -->
+      <div class="card">
+        <h3>Chapter 4 – Test Techniques</h3>
+        <p>
+          This chapter teaches how to design effective test cases using <strong>Black-box, White-box,</strong> and <strong>Experience-based</strong> techniques.
+        </p>
+        <p>
+          <strong>Black-box</strong> methods include Equivalence Partitioning, Boundary Value Analysis, Decision Tables, State Transition, and Use Cases.
+          These focus on validating behavior without knowing internal code.
+        </p>
+        <p>
+          <strong>White-box</strong> techniques like Statement and Decision coverage focus on code structure,
+          while experience-based techniques rely on tester intuition (Error Guessing, Exploratory Testing).
+        </p>
+      </div>
+
+      <!-- Chapter 5 -->
+      <div class="card">
+        <h3>Chapter 5 – Test Planning & Estimation</h3>
+        <p>
+          This chapter emphasizes the importance of <strong>strategic test planning</strong> — defining objectives, scope, risks, and resources 
+          for an efficient and controlled testing effort.
+        </p>
+        <p>
+          It introduces <strong>estimation techniques</strong> like Ratio-based, Extrapolation, Wideband Delphi, and Three-point estimation,
+          helping teams allocate realistic time and effort.
+        </p>
+        <p>
+          A well-structured test plan leads to <strong>predictable schedules, cost efficiency, and higher test coverage.</strong>
+        </p>
+      </div>
+
+      <!-- Chapter 6 -->
+      <div class="card">
+        <h3>Chapter 6 – Test Tools</h3>
+        <p>
+          The final chapter introduces tools that support various testing activities — from planning to automation and reporting.
+        </p>
+        <p>
+          Categories include <strong>Test Management</strong> (TestRail, Zephyr), <strong>Defect Tracking</strong> (Jira, Bugzilla),
+          <strong>Automation</strong> (Selenium, Playwright), and <strong>Performance Testing</strong> (JMeter, k6).
+        </p>
+        <p>
+          Tools increase efficiency and accuracy but require proper selection, setup, and maintenance to deliver full value.
+        </p>
+        
+        <div class="ctfl-quiz-box">
+  <h3> Check Your CTFL Knowledge</h3>
+  <p>
+    Test your understanding of CTFL concepts covered above with a short interactive quiz.
+  </p>
+  <button class="primary-btn" onclick="startQuiz()">Start Quiz</button>
+  <div class="ctfl-quiz-card">
+    <div id="ctfl-quiz-section" class="ctfl-quiz-box">
+  <!-- محتوى الكويز -->
+</div>
+
+  <!-- Quick CTFL Quiz content -->
+</div>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+   <!-- Popup for CTFL cards -->
+<div id="popupOverlay" class="popup-overlay" style="display:none;">
+    <div class="popup">
+        <h3 id="popupTitle"></h3>
+        <p id="popupContent"></p>
+        <button onclick="closePopup()">Close</button>
+    </div>
+</div>
+
+  <script>
+   window.addEventListener("DOMContentLoaded", () => {
+  // حفظ الثيم
+  const savedTheme = localStorage.getItem("theme") || "light";
+  document.documentElement.setAttribute("data-theme", savedTheme);
+
+  const loggedIn = localStorage.getItem("loggedIn") === "true";
+  const name = localStorage.getItem("userName") || "User";
+
+  if (loggedIn) {
+    // لو المستخدم مسجّل دخول → افتح الداشبورد مباشرة
+    document.getElementById("welcome").style.display = "none";
+    document.getElementById("auth").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
+    document.getElementById("hello").textContent = "Hello " + name;
+    document.getElementById("infoCard").style.display = "block";
+
+    if (typeof loadFromBackend === "function") loadFromBackend();
+    if (typeof loadBugReports === "function") loadBugReports();
+  } else {
+    // أول مرة أو بعد تسجيل خروج
+    document.getElementById("welcome").style.display = "flex";
+    document.getElementById("auth").style.display = "none";
+    document.getElementById("dashboard").style.display = "none";
+  }
+});
+    /* ========= Navigation ========= */
+function closeWelcome() {
+  console.log(" closeWelcome() triggered"); // للتأكد بالتيرمنال
+  const welcome = document.getElementById('welcome');
+  const auth = document.getElementById('auth');
+  if (!welcome || !auth) {
+    console.error("❌ عنصر #welcome أو #auth غير موجود");
+    return;
+  }
+
+  // إخفاء صفحة البداية
+  welcome.style.display = 'none';
+  // عرض صفحة تسجيل الدخول
+  auth.style.display = 'block';
+}
+    /* ========= Theme ========= */
+    function toggleTheme(){
+      const html=document.documentElement;
+      html.setAttribute('data-theme', html.getAttribute('data-theme')==='dark'?'light':'dark');
+      localStorage.setItem('theme', html.getAttribute('data-theme'));
+    }
+    function toggleInfo(){
+  const card = document.getElementById('infoCard');
+
+  // لو ظاهر نخفيه
+  if(card.style.display === 'block'){
+    card.style.display = 'none';
+    return;
+  }
+
+  // نخفي التابات قبل ما نعرض الكارد
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+  // إظهار كارد المعلومات
+  card.style.display = 'block';
+}
+   (function initTheme(){
+  const saved = localStorage.getItem('theme');
+  const theme = saved || 'light';
+  document.documentElement.setAttribute('data-theme', theme);
+})();
+
+    /* ========= Auth ========= */
+  async function register() {
+  const name  = document.getElementById('regName').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const pass  = document.getElementById('regPass').value.trim();
+  const box   = document.getElementById('regAlert');
+
+  if (!name || !email || !pass) {
+    return showAlert(box, 'Please fill all fields', 'warn');
+  }
+
+  // تحقق من كلمة المرور — 8 أرقام فقط
+  if (!/^\d{8}$/.test(pass)) {
+    return showAlert(box, 'Password must be exactly 8 digits (e.g. 12345678)', 'warn');
+  }
+
+  try {
+    const res = await fetch("http://127.0.0.1:5002/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password: pass })
+    });
+
+    const data = await res.json();
+
+    if (!data.ok) {
+      return showAlert(box, data.message || 'Registration failed', 'warn');
+    }
+
+    //  نجاح — خزّن معلومات المستخدم من السيرفر
+    localStorage.setItem('userName', data.user.name);
+    localStorage.setItem('userEmail', data.user.email);
+    localStorage.setItem('userRole', data.user.role);
+
+    showAlert(box, 'Account created successfully ', 'ok');
+
+    setTimeout(() => showLogin(), 1500);
+
+  } catch (err) {
+    console.error(err);
+    showAlert(box, 'Server error', 'warn');
+  }
+}async function login() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass  = document.getElementById('loginPass').value.trim();
+  const box   = document.getElementById('authAlert');
+
+  if (!email || !pass) {
+    return showAlert(box, 'Please enter email and password', 'warn');
+  }
+
+  try {
+    const res = await fetch("http://127.0.0.1:5002/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password: pass })
+    });
+
+    const data = await res.json();
+
+    if (!data.ok) {
+      return showAlert(box, data.message || 'Login failed', 'warn');
+    }
+
+    //  نحفظ بيانات المستخدم بعد تسجيل الدخول
+    localStorage.setItem('userName', data.user.name);
+    localStorage.setItem('userEmail', data.user.email);
+    localStorage.setItem('userRole', data.user.role);
+
+    showAlert(box, 'Login successful ', 'ok');
+setTimeout(() => {
+    openDashboard(data.user.name);
+}, 800);
+  } catch (err) {
+    showAlert(box, 'Server error — try again later', 'warn');
+  }
+}
+function logout() {
+  localStorage.removeItem("loggedIn");
+  localStorage.removeItem("userName");
+  localStorage.removeItem("userEmail");
+  localStorage.removeItem("userRole");
+
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('auth').style.display = 'none';
+  document.getElementById('welcome').style.display = 'flex';
+}
+//  تحميل البق ريبورت من السيرفر
+
+function renderBugReportsFromBackend(list) {
+  console.log("🔥 renderBugReportsFromBackend called with:", list);
+  const ul = document.getElementById("brList");
+  ul.innerHTML = "";
+
+  if (!Array.isArray(list) || list.length === 0) {
+    ul.innerHTML = "<li>No bug reports found.</li>";
+    return;
+  }
+// حط isAdmin فوق قبل الـ forEach
+const isAdmin = (localStorage.getItem('userRole') === 'admin');
+
+list.forEach((b) => {
+    const needsReview = !b.review_status || b.review_status === 'Pending';
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <div>
+        <strong>Title:</strong> ${b.title || "-"}<br>
+        <strong>Priority:</strong> <span class="chip">${b.priority || "-"}</span><br>
+        <strong>Steps:</strong> ${b.steps || "-"}<br>
+        <strong>Expected:</strong> ${b.expected || "-"}<br>
+        <strong>Actual:</strong> ${b.actual || "-"}<br>
+        <div class="muted">Reported by: ${b.reported_by || '-'}</div>
+
+        ${!needsReview && b.review_status ? `
+          <div style="margin-top:6px;">
+            <strong>Review:</strong>
+            <span class="chip review" data-status="${b.review_status}">${b.review_status}</span>
+            ${b.review_comment ? `<div class="muted">${b.review_comment}</div>` : ''}
+          </div>
+        ` : ''}
+
+        <div class="row" style="margin-top:8px;gap:8px;">
+          <button class="btn small ok" onclick='openBugEditPopup(${JSON.stringify(b)})'>Edit</button>
+          <button class="btn small warn" onclick="deleteBugReport(${b.id})">Delete</button>
+          ${isAdmin && needsReview ? `<button class="btn small ok" onclick="openSideReview('br', ${b.id})">Review</button>` : ``}
+        </div>
+      </div>
+    `;
+    ul.appendChild(li);
+  });
+}
+function openDashboard(name) {
+  console.log(`Opening dashboard for ${name}`);
+
+  // أول شي نخفي auth ونظهر dashboard
+  document.getElementById('auth').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  document.getElementById('hello').textContent = 'Hello ' + name;
+
+  // بعدها نظهر الكارد التعريفي
+  document.getElementById('infoCard').style.display = 'block';
+
+  // ثم نحمل الداتا من السيرفر
+  localStorage.setItem('loggedIn', 'true');
+
+  if (typeof loadFromBackend === 'function') loadFromBackend();
+  if (typeof loadBugReports === 'function') loadBugReports();
+}
+if(!localStorage.getItem("infoSeen")){
+    openInfoPopup();
+}
+    /* ========= Alerts ========= */
+    function showAlert(el, msg, type='ok'){
+      el.className='alert '+type+' show';
+      el.textContent=msg;
+      setTimeout(()=>{ el.className='alert '+type; el.style.display='none'; }, 2000);
+      el.style.display='block';
+    }
+
+    /* ========= Tabs ========= */
+    function openTab(ev,id){
+      document.getElementById("infoCard").style.display = "none";
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+      ev.currentTarget.classList.add('active');
+      document.getElementById(id).classList.add('active');
+      // اغلاق أي بوب-أب جانبي مفتوح عند تغيير التبويب
+document.querySelectorAll('.side-popup-overlay').forEach(el => el.remove());
+    }
+    function showRegister() {
+  document.getElementById('loginView').style.display = 'none';
+  document.getElementById('registerView').style.display = 'block';
+}
+
+function showLogin() {
+  document.getElementById('registerView').style.display = 'none';
+  document.getElementById('loginView').style.display = 'block';
+}
+
+
+
+/* ========= Test Cases (Connected to Flask Backend) ========= */
+function renderTestCases(list) {
+  const ul = document.getElementById('tcList');
+  ul.innerHTML = '';
+
+  list.forEach(tc => {
+    const needsReview = !tc.review_status || tc.review_status.toLowerCase() === 'pending';
+    const isAdmin = (localStorage.getItem('userRole') === 'admin');
+
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <div>
+        <strong>ID:</strong> ${tc.id || '-'}<br>
+        <strong>Module:</strong> ${tc.module || '-'}<br>
+        <strong>Actor:</strong> ${tc.actor || '-'}<br>
+        <strong>Scenario:</strong> ${tc.scenario || '-'}<br>
+        <strong>Steps:</strong> ${tc.steps || '-'}<br>
+        <strong>Expected:</strong> ${tc.expected || '-'}<br>
+        <strong>Actual:</strong> ${tc.actual || '-'}<br>
+        <strong>Status:</strong> <span class="chip">${tc.status || '-'}</span><br>
+<div class="row" style="margin-top:10px; gap:8px;">
+  <button class="btn small ok" onclick="openEditPopup(${JSON.stringify(tc)})">Edit</button>
+  <button class="btn small warn" onclick="deleteTestCase(${tc.db_id})">Delete</button>
+  ${isAdmin && needsReview ? `
+    <button class="btn small ok" onclick="openSideReview('tc', ${tc.db_id})">Review</button>
+  ` : ''}
+</div>
+
+        ${!needsReview && tc.review_status ? `
+          <div style="margin-top:10px;">
+            <strong>Review:</strong>
+            <span class="chip review" data-status="${tc.review_status}">${tc.review_status}</span>
+            ${tc.review_comment ? `<div class="muted" style="margin-top:4px;">${tc.review_comment}</div>` : ''}
+            ${tc.reported_by ? `<div class="muted" style="margin-top:4px;">Reported by: ${tc.reported_by}</div>` : ''}
+          </div>
+        ` : ''}
+      </div>
+    `;
+    ul.appendChild(li);
+  });
+}
+
+
+// تحميل جميع الـ Test Cases من قاعدة البيانات
+async function loadFromBackend() {
+  try {
+    const res = await fetch("http://127.0.0.1:5002/get_testcases");
+    const data = await res.json();
+    console.log(" Test cases loaded:", data);
+    renderTestCases(data);
+  } catch (err) {
+    console.error(" Failed to load test cases:", err);
+  }
+}
+
+// إرسال Test Case جديد إلى الـ backend
+async function addTestCase() {
+  const id = document.getElementById('tcID').value.trim();
+  const module = document.getElementById('tcModule').value.trim();
+  const actor = document.getElementById('tcActor').value.trim();
+  const scenario = document.getElementById('tcScenario').value.trim();
+  const steps = document.getElementById('tcSteps').value.trim();
+  const type = document.getElementById('tcType').value;
+  const expected = document.getElementById('tcExpected').value.trim();
+  const actual = document.getElementById('tcActual').value.trim();
+  const status = document.getElementById('tcStatus').value;
+  const box = document.getElementById('tcAlert');
+
+  // ✅ اسم المستخدم من localStorage
+  const reported_by = localStorage.getItem('userName') || "Unknown";
+
+  if (!id || !module || !actor || !scenario || !steps || !expected || !actual)
+    return showAlert(box, 'Please fill all fields', 'warn');
+
+  const tc = { id, module, actor, scenario, steps, type, expected, actual, status, reported_by };
+
+  try {
+    const res = await fetch("http://127.0.0.1:5002/add_testcase", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(tc)
+    });
+
+    const result = await res.json();
+    showAlert(box, result.message || "Test case added successfully!", "ok");
+
+    // تنظيف الحقول بعد الإضافة
+    document.querySelectorAll('#tc input, #tc textarea').forEach(el => el.value = "");
+    document.getElementById('tcType').value = "Positive";
+    document.getElementById('tcStatus').value = "Pass";
+//  تحديث القائمة يدويًا بدون إعادة تحميل الصفحة
+const ul = document.getElementById('tcList');
+const li = document.createElement('li');
+li.innerHTML = `
+  <div>
+    <strong>ID:</strong> ${tc.id}<br>
+    <strong>Module:</strong> ${tc.module}<br>
+    <strong>Actor:</strong> ${tc.actor}<br>
+    <strong>Scenario:</strong> ${tc.scenario}<br>
+    <strong>Steps:</strong> ${tc.steps}<br>
+    <strong>Expected:</strong> ${tc.expected}<br>
+    <strong>Actual:</strong> ${tc.actual}<br>
+    <strong>Status:</strong> <span class="chip">${tc.status}</span><br>
+    <strong>Reported By:</strong> ${tc.reported_by}<br>
+    <div class="row">
+      <button class="btn small ok" onclick='editTestCase(${JSON.stringify(tc)})'>Edit</button>
+      <button class="btn small warn" onclick="deleteTestCase('${tc.id}')">Delete</button>
+    </div>
+  </div>
+`;
+ul.prepend(li);
+loadFromBackend(); //  تحديث القائمة بدون إعادة تحميل الصفحة
+
+  } catch (error) {
+    console.error("Error:", error);
+    showAlert(box, "Connection error. Check Flask server.", "err");
+  }
+}
+// حذف Test Case بدون الرجوع للصفحة الرئيسية
+async function deleteTestCase(db_id) {
+  if (!confirm("Are you sure you want to delete this test case?")) return;
+
+  try {
+    const res = await fetch(`http://127.0.0.1:5002/delete_testcase/${db_id}`, {
+      method: "DELETE"
+    });
+    const result = await res.json();
+
+    const box = document.getElementById('tcAlert');
+    showAlert(box, result.message || " Test case deleted successfully!", "ok");
+
+    await loadFromBackend();
+
+  } catch (error) {
+    console.error("Error deleting test case:", error);
+    const box = document.getElementById('tcAlert');
+    showAlert(box, " Connection error. Check Flask server.", "err");
+  }
+}
+
+async function editTestCase(tcData) {
+  const tc = typeof tcData === "string" ? JSON.parse(tcData) : tcData;
+  const updatedModule = prompt("Edit Module:", tc.module);
+  const updatedActor = prompt("Edit Actor:", tc.actor);
+  const updatedScenario = prompt("Edit Scenario:", tc.scenario);
+  const updatedSteps = prompt("Edit Steps:", tc.steps);
+  const updatedExpected = prompt("Edit Expected Result:", tc.expected);
+  const updatedActual = prompt("Edit Actual Result:", tc.actual);
+  const updatedStatus = prompt("Edit Status (Pass/Fail):", tc.status);
+
+  if (!updatedModule || !updatedActor || !updatedScenario || !updatedSteps || !updatedExpected || !updatedActual || !updatedStatus) {
+    alert("All fields are required!");
+    return;
+  }
+
+  const updatedData = {
+    id: tc.id,
+    module: updatedModule,
+    actor: updatedActor,
+    scenario: updatedScenario,
+    steps: updatedSteps,
+    expected: updatedExpected,
+    actual: updatedActual,
+    status: updatedStatus
+  };
+
+  try {
+    const res = await fetch(`http://127.0.0.1:5002/edit_testcase/${tc.db_id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedData)
+    });
+
+    const data = await res.json();
+    const box = document.getElementById('tcAlert') || document.getElementById('authAlert');
+
+    if (data.message) {
+      showAlert(box, data.message, 'ok');
+    } else {
+      showAlert(box, "Updated ", 'ok');
+    }
+
+    await loadFromBackend();
+
+  } catch (error) {
+    console.error("Error updating test case:", error);
+    const box = document.getElementById('tcAlert');
+    showAlert(box, "X Connection error. Check Flask server.", 'err');
+  }
+}
+
+
+
+/* ========= Bug Reports (Connected to Flask Backend) ========= */
+
+// عرض جميع الـ Bug Reports
+async function loadBugReports() {
+  try {
+    const res = await fetch("http://127.0.0.1:5002/get_bugreports");
+    const data = await res.json();
+    console.log(" Bug reports loaded:", data);
+    renderBugReportsFromBackend(data);
+  } catch (err) {
+    console.error(" Failed to load bug reports:", err);
+  }
+}
+function renderBugReportsFromBackend(list) {
+  const ul = document.getElementById("brList");
+  ul.innerHTML = "";
+
+  if (!Array.isArray(list) || list.length === 0) {
+    ul.innerHTML = "<li>No bug reports found.</li>";
+    return;
+  }
+
+  list.forEach((b) => {
+    const needsReview = !b.review_status || b.review_status === 'Pending';
+    const canReview = (localStorage.getItem('userRole') === 'admin') && needsReview;
+
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <div>
+        <strong>Title:</strong> ${b.title || "-"}<br>
+        <strong>Priority:</strong> <span class="chip">${b.priority || "-"}</span><br>
+        <strong>Steps:</strong> ${b.steps || "-"}<br>
+        <strong>Expected:</strong> ${b.expected || "-"}<br>
+        <strong>Actual:</strong> ${b.actual || "-"}<br>
+        <div class="muted">Reported by: ${b.reported_by || '-'}</div>
+
+        ${!needsReview && b.review_status ? `
+          <div style="margin-top:6px;">
+            <strong>Review:</strong>
+            <span class="chip">${b.review_status}</span>
+            ${b.review_comment ? `<div class="muted">${b.review_comment}</div>` : ''}
+          </div>
+        ` : ''}
+
+       <div class="row" style="margin-top:8px;gap:8px;">
+  <button class="btn small ok" onclick='openBugEditPopup(${JSON.stringify(b)})'>Edit</button>
+  <button class="btn small warn" onclick="deleteBugReport(${b.id})">Delete</button>
+
+  ${canReview ? `
+  <button class="btn small ok" onclick="openSideReview('br', ${b.id})">Review</button>
+` : ''}
+
+</div>
+      </div>
+    `;
+    ul.appendChild(li);
+  });
+}
+
+async function addBugReport() {
+  const title = document.getElementById("brTitle").value.trim();
+  const priority = document.getElementById("brPriority").value;
+  const steps = document.getElementById("brSteps").value.trim();
+  const expected = document.getElementById("brExpected").value.trim();
+  const actual = document.getElementById("brActual").value.trim();
+  const box = document.getElementById("brAlert");
+
+  // ✅ اسم المستخدم من localStorage
+  const reported_by = localStorage.getItem('userName') || "Unknown";
+
+  if (!title || !steps || !expected || !actual)
+    return showAlert(box, "Please fill all fields", "warn");
+
+  const bug = { title, priority, steps, expected, actual, reported_by };
+
+  try {
+    const res = await fetch("http://127.0.0.1:5002/add_bugreport", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(bug),
+    });
+    const result = await res.json();
+    showAlert(box, result.message || " Bug report added!", "ok");
+
+    // تنظيف الحقول بعد الإضافة
+    document.getElementById("brTitle").value = "";
+    document.getElementById("brSteps").value = "";
+    document.getElementById("brExpected").value = "";
+    document.getElementById("brActual").value = "";
+    document.getElementById("brPriority").value = "Low";
+
+    // تحديث العرض بدون تحديث الصفحة
+    await loadBugReports();
+  } catch (err) {
+    console.error(" Error adding bug report:", err);
+    showAlert(box, " Connection error. Check Flask server.", "err");
+  }
+}
+
+// تعديل Bug Report
+function openBugEditPopup(b) {
+  const overlay = document.createElement("div");
+  overlay.className = "popup-overlay";
+  overlay.style.display = "flex";
+
+  overlay.innerHTML = `
+    <div class="popup-content">
+      <h3>Edit Bug Report</h3>
+      <input id="editBugTitle" placeholder="Title" value="${b.title || ''}" />
+      <select id="editBugPriority">
+        <option value="High" ${b.priority === "High" ? "selected" : ""}>High</option>
+        <option value="Medium" ${b.priority === "Medium" ? "selected" : ""}>Medium</option>
+        <option value="Low" ${b.priority === "Low" ? "selected" : ""}>Low</option>
+      </select>
+      <textarea id="editBugSteps" placeholder="Steps">${b.steps || ''}</textarea>
+      <input id="editBugExpected" placeholder="Expected" value="${b.expected || ''}" />
+      <input id="editBugActual" placeholder="Actual" value="${b.actual || ''}" />
+      <div class="row" style="margin-top:10px;gap:10px;">
+        <button class="btn ok" onclick="saveBugEdit(${b.id})">Save</button>
+        <button class="btn warn" onclick="this.closest('.popup-overlay').remove()">Cancel</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+}
+
+// حفظ التعديل
+async function saveBugEdit(id) {
+  const updatedData = {
+    title: document.getElementById("editBugTitle").value.trim(),
+    priority: document.getElementById("editBugPriority").value,
+    steps: document.getElementById("editBugSteps").value.trim(),
+    expected: document.getElementById("editBugExpected").value.trim(),
+    actual: document.getElementById("editBugActual").value.trim(),
+  };
+
+  try {
+    const res = await fetch(`http://127.0.0.1:5002/edit_bugreport/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedData),
+    });
+    const result = await res.json();
+    alert(result.message);
+    document.querySelector(".popup-overlay").remove();
+    loadBugReports();
+  } catch (err) {
+    alert(" Error saving bug report changes.");
+  }
+}
+
+// حذف Bug Report
+async function deleteBugReport(id) {
+  if (!confirm("Are you sure you want to delete this bug report?")) return;
+
+  try {
+    const res = await fetch(`http://127.0.0.1:5002/delete_bugreport/${id}`, {
+      method: "DELETE",
+    });
+    const result = await res.json();
+    showAlert(document.getElementById("brAlert"), result.message, "ok");
+    await loadBugReports();
+  } catch (err) {
+    console.error(" Error deleting bug report:", err);
+  }
+}
+
+
+
+
+    /* ========= Templates (dummy files) ========= */
+    function downloadTemplate(which){
+      const content = which==='bug'
+        ? `Bug Report Template\n\nTitle:\nPriority (High/Medium/Low):\nEnvironment:\nSteps to Reproduce:\nExpected Result:\nActual Result:\nAttachments:\n`
+        : `Test Case Guide\n\nTC ID:\nTitle:\nPreconditions:\nSteps:\nExpected:\nPriority:\n`;
+      const blob=new Blob([content],{type:'text/plain'});
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a'); a.href=url; a.download= which==='bug'?'bug_report_template.txt':'test_case_guide.txt'; a.click();
+      URL.revokeObjectURL(url);
+    }
+    /* ======= Popup Control ======= */
+function openPopup(title, content) {
+  document.getElementById("popupTitle").textContent = title;
+  document.getElementById("popupContent").textContent = content;
+  document.getElementById("popupOverlay").style.display = "flex";
+}
+
+function closePopup() {
+  document.getElementById("popupOverlay").style.display = "none";
+}
+
+/* ربط الكاردات بالبوب-أب */
+document.querySelectorAll("#ctfl .card").forEach(card => {
+  card.addEventListener("click", () => {
+    const title = card.querySelector("h3").textContent;
+    const content = card.querySelector("p").textContent;
+    openPopup(title, content);
+  });
+});
+/* ==== CTFL Popup Logic ==== */
+function openCtflPopup() {
+  document.getElementById("ctflPopup").style.display = "flex";
+}
+function closeCtflPopup() {
+  document.getElementById("ctflPopup").style.display = "none";
+}
+/* ========= Edit Popup ========= */
+function openEditPopup(tc) {
+  const overlay = document.createElement('div');
+  overlay.className = 'popup-overlay';
+  overlay.style.display = 'flex';
+
+  overlay.innerHTML = `
+    <div class="popup-content">
+      <h3>Edit Test Case</h3>
+      <input id="editModule" placeholder="Module" value="${tc.module || ''}" />
+      <input id="editActor" placeholder="Actor" value="${tc.actor || ''}" />
+      <input id="editScenario" placeholder="Scenario" value="${tc.scenario || ''}" />
+      <textarea id="editSteps" placeholder="Steps">${tc.steps || ''}</textarea>
+      <input id="editExpected" placeholder="Expected Result" value="${tc.expected || ''}" />
+      <input id="editActual" placeholder="Actual Result" value="${tc.actual || ''}" />
+      <select id="editStatus">
+        <option value="Pass" ${tc.status === 'Pass' ? 'selected' : ''}>Pass</option>
+        <option value="Fail" ${tc.status === 'Fail' ? 'selected' : ''}>Fail</option>
+      </select>
+      <div class="row" style="margin-top:10px; gap:10px;">
+        <button class="btn ok" onclick="saveEdit(${tc.db_id})">Save</button>
+        <button class="btn warn" onclick="this.closest('.popup-overlay').remove()">Cancel</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+}
+
+async function saveEdit(id) {
+  const data = {
+    module: document.getElementById('editModule').value.trim(),
+    actor: document.getElementById('editActor').value.trim(),
+    scenario: document.getElementById('editScenario').value.trim(),
+    steps: document.getElementById('editSteps').value.trim(),
+    expected: document.getElementById('editExpected').value.trim(),
+    actual: document.getElementById('editActual').value.trim(),
+    status: document.getElementById('editStatus').value
+  };
+
+  try {
+    const res = await fetch(`http://127.0.0.1:5002/edit_testcase/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const result = await res.json();
+    alert(result.message);
+    document.querySelector('.popup-overlay').remove();
+    loadFromBackend();
+  } catch (err) {
+    alert('Error saving changes.');
+    
+  }
+  /* ======= Popup Control for Chapters ======= */
+function openPopup(title, content) {
+  const overlay = document.getElementById("popupOverlay");
+  const popupTitle = document.getElementById("popupTitle");
+  const popupContent = document.getElementById("popupContent");
+
+  if (!overlay || !popupTitle || !popupContent) return;
+
+  popupTitle.textContent = title;
+  popupContent.innerHTML = content; // نحافظ على الفقرات والتنسيق
+  overlay.style.display = "flex";
+}
+/* ======= Button: CTFL Info Popup ======= */
+function openCtflInfo() {
+  const title = "CTFL Foundation Level Certification";
+  const content = `
+    <p>The <strong>ISTQB Certified Tester Foundation Level (CTFL)</strong> is the world's most recognized qualification in software testing.</p>
+    <p>It provides a solid foundation for understanding testing concepts, processes, and tools across the Software Development Life Cycle (SDLC).</p>
+    <ul>
+      <li>Introduces essential testing terminology and key techniques.</li>
+      <li>Focuses on quality assurance principles and defect prevention.</li>
+      <li>Prepares candidates for advanced certifications (Test Analyst, Test Manager, Agile Tester, etc.).</li>
+      <li>Globally recognized and valued by employers and QA professionals.</li>
+    </ul>
+    <p><strong>Goal:</strong> To enable testers to communicate effectively within teams and ensure software quality in every project stage.</p>
+  `;
+  showCtflSidePopup(title, content);
+}
+function closePopup() {
+  const overlay = document.getElementById("popupOverlay");
+  if (overlay) overlay.style.display = "none";
+}
+
+/* ======= Link CTFL Cards to Popup ======= */
+document.querySelectorAll("#ctfl .card").forEach(card => {
+  card.addEventListener("click", () => {
+    const title = card.querySelector("h3").textContent;
+    const paragraphs = Array.from(card.querySelectorAll("p"))
+      .map(p => `<p>${p.innerHTML}</p>`)
+      .join("");
+    openPopup(title, paragraphs);
+  });
+});
+
+// ==== Animation Keyframes ====
+const style = document.createElement('style');
+style.textContent = `
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+`;
+document.head.appendChild(style);
+
+// ==== Save Changes and Refresh ====
+async function saveBugEdit(id) {
+  const updated = {
+    title: document.getElementById("editBugTitle").value.trim(),
+    priority: document.getElementById("editBugPriority").value,
+    steps: document.getElementById("editBugSteps").value.trim(),
+    expected: document.getElementById("editBugExpected").value.trim(),
+    actual: document.getElementById("editBugActual").value.trim()
+  };
+
+  if (!updated.title || !updated.steps || !updated.expected || !updated.actual) {
+    alert("⚠️ Please fill all fields before saving.");
+    return;
+  }
+
+  try {
+    const res = await fetch(`http://127.0.0.1:5002/edit_bugreport/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updated),
+    });
+
+    const result = await res.json();
+    alert(result.message);
+    document.querySelector(".popup-overlay").remove();
+    await loadBugReports();
+  } catch (err) {
+    console.error(" Error updating bug:", err);
+    alert("Failed to update bug report. Check server connection.");
+  }
+}
+}// تستخدم لعرض تفاصيل مراجعة الأدمن
+function openReviewPopup(type, refId, reportedBy, reviewStatus, comment) {
+  const title = `${type} Review — ${refId}`;
+  const content = `
+    <p><strong>Reported by:</strong> ${reportedBy}</p>
+    <p><strong>Review status:</strong> <span class="chip review">${reviewStatus}</span></p>
+    <p><strong>Admin comment:</strong></p>
+    <p style="white-space:pre-wrap;">${comment}</p>
+  `;
+  // لو عندك openPopup(title, content) استخدمها (موجودة في كودك)
+  if (typeof openPopup === 'function') {
+    openPopup(title, content);
+  } else {
+    // بديل لو openPopup غير موجود
+    alert(`${title}\n\nStatus: ${reviewStatus}\nBy: ${reportedBy}\n\nComment:\n${comment}`);
+  }
+}
+
+// بسيطة لتفادي كسر الـ onclick عند وجود اقتباسات
+function escapeHtml(str) {
+  if (!str && str !== 0) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+   </script>
+     
+
+
+
+
+   <script>
+/* ======= CTFL Side Popup System (fixed final version) ======= */
+
+// ➊ إنشاء البوب-أب الجانبي
+function showCtflSidePopup(title, content) {
+  const old = document.querySelector(".side-popup-overlay");
+  if (old) old.remove();
+
+  const overlay = document.createElement("div");
+  overlay.className = "side-popup-overlay";
+  overlay.innerHTML = `
+    <div class="side-popup">
+      <div class="side-popup-header">
+        <h2>${title}</h2>
+        <button class="close-btn" onclick="this.closest('.side-popup-overlay').remove()">×</button>
+      </div>
+      <div class="side-popup-content">${content}</div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+}
+
+// ➋ تنسيقات البوب-أب
+const style = document.createElement("style");
+style.textContent = `
+.side-popup-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  display: flex; justify-content: flex-end;
+  align-items: stretch; z-index: 999;
+  animation: fadeIn 0.25s ease;
+}
+.side-popup {
+  width: 420px; max-width: 90%;
+  background: var(--card-bg);
+  color: var(--text);
+  box-shadow: -6px 0 20px rgba(0,0,0,0.35);
+  border-top-left-radius: 20px; border-bottom-left-radius: 20px;
+  padding: 28px;
+  animation: slideIn 0.35s ease;
+  overflow-y: auto;
+}
+.side-popup-header {
+  display:flex; justify-content:space-between; align-items:center;
+  border-bottom:1px solid var(--border);
+  margin-bottom:10px;
+}
+.side-popup-header h2 { margin:0; color: var(--btn-grad-3); }
+.close-btn {
+  background:none; border:none; font-size:24px; color:var(--text); cursor:pointer;
+}
+.side-popup-content p, .side-popup-content li {
+  line-height:1.6; font-size:15px; margin-bottom:8px;
+}
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes slideIn { from{transform:translateX(100%);} to{transform:translateX(0);} }
+`;
+document.head.appendChild(style);
+
+// ➌ زر "View Certification Info"
+function openCtflInfo() {
+const title = `<span style="color:#003A76; font-weight:700;">CTFL Foundation Level Certification</span>`;
+  const content = `
+  <h1 style="text-align:center; color:#198754; margin-top:0;">
+    <h2 style="color:#003A76;">Official ISTQB® Certified Tester Foundation Level</h2>
+    </h1>
+    <p>The <strong>ISTQB Certified Tester Foundation Level (CTFL)</strong> is the world's most recognized qualification in software testing.</p>
+    <p>It provides a solid foundation for understanding testing concepts, processes, and tools across the Software Development Life Cycle (SDLC).</p>
+    <ul>
+      <li>Introduces essential testing terminology and key techniques.</li>
+      <li>Focuses on quality assurance principles and defect prevention.</li>
+      <li>Prepares candidates for advanced certifications (Test Analyst, Test Manager, Agile Tester, etc.).</li>
+      <li>Globally recognized and valued by employers and QA professionals.</li>
+    </ul>
+    <p><strong>Goal:</strong> To enable testers to communicate effectively within teams and ensure software quality in every project stage.</p>
+  `;
+  showCtflSidePopup(title, content);
+}
+  function openLearnPopup(kind){
+    const map = {
+      /* =========================
+         TEST CASES: Detailed
+      ==========================*/
+      "tc_detail": {
+        title: "Test Case — Detailed Explanation",
+        html: `
+<p><strong>Definition.</strong> A test case is a precise, executable specification of <em>what</em> to validate, <em>how</em> to validate it, and <em>which</em> results constitute success or failure for a specific scope in the system.</p>
+
+<p><strong>Objectives.</strong> Verify functional correctness, guard against regressions, document behavior, and provide reproducible evidence.</p>
+
+<p><strong>Core Fields.</strong></p>
+<ul>
+  <li><strong>ID</strong> – Unique identifier to track and cross-reference. Use a stable, searchable pattern (e.g., <code>TC-LOGIN-001</code>).</li>
+  <li><strong>Module</strong> – Logical area under test (e.g., Authentication, Cart, Payments).</li>
+  <li><strong>Actor</strong> – Who/what performs the steps (end user, admin, API client, batch job).</li>
+  <li><strong>Test Scenario</strong> – High-level objective or behavior to validate (what we intend to prove).</li>
+  <li><strong>Preconditions</strong> – Mandatory state/data/environment required before execution (e.g., user exists, feature flag enabled).</li>
+  <li><strong>Test Data</strong> – Concrete values fed into the system (emails, passwords, boundary numbers, files).</li>
+  <li><strong>Steps</strong> – Ordered, deterministic actions (imperative verbs, one expectation per step when possible).</li>
+  <li><strong>Case Type</strong> – <em>Positive</em> (valid path) vs <em>Negative</em> (invalid/edge inputs; resilience and error handling).</li>
+  <li><strong>Expected Result</strong> – Observable, verifiable system behavior (UI, API payload, DB change, side-effects).</li>
+  <li><strong>Actual Result</strong> – What actually happened during execution (include evidence refs: screenshots/logs).</li>
+  <li><strong>Status</strong> – <em>Pass</em> / <em>Fail</em> / <em>Blocked</em> / <em>Not Run</em>.</li>
+  <li><strong>Comment</strong> – Notes, anomalies, assumptions, cleanup steps, or follow-ups.</li>
+</ul>
+
+<p><strong>Quality Bar.</strong></p>
+<ul>
+  <li><em>Atomic</em>: one objective per case; if you need branching, create separate cases.</li>
+  <li><em>Deterministic</em>: same input → same outcome; avoid flaky prerequisites.</li>
+  <li><em>Observable</em>: define where to observe success (UI element, API code 200, DB row inserted).</li>
+  <li><em>Traceable</em>: link to requirement/user story/bug ID (bi-directional traceability).</li>
+</ul>
+
+<p><strong>Technique Hints.</strong> Use Equivalence Partitioning & Boundary Value Analysis for inputs; Decision Tables for rule combos; State Transition for workflows; Error Guessing for high-risk areas.</p>
+        `
+      },
+
+      /* =========================
+         TEST CASES: Example
+      ==========================*/
+      "tc_example": {
+        title: "Test Case — Example (Registration: Happy Path)",
+        html: `
+<pre style="white-space:pre-wrap; line-height:1.5; font-family:ui-monospace, SFMono-Regular, Menlo, monospace;">
+ID:           TC-REG-001
+Module:       Authentication / Registration
+Actor:        End User (Guest)
+Test Scenario: User creates a new account with valid data
+
+Preconditions:
+  • Registration service is up (200 OK on /health).
+  • No existing account with email test.user@example.com.
+  • Browser cleared (no stale sessions), CSRF token available.
+
+Test Data:
+  • Name: "Test User"
+  • Email: test.user@example.com
+  • Password: 12345678   (exactly 8 digits, per current rule)
+  • Confirm Password: 12345678
+
+Steps:
+  1. Navigate to /register.
+  2. Enter Name = "Test User".
+  3. Enter Email = test.user@example.com.
+  4. Enter Password = 12345678 and Confirm = 12345678.
+  5. Click "Create Account".
+
+Expected Result:
+  • App shows success toast "Account created" and redirects to Login.
+  • New user row persisted in DB (users table) with email = test.user@example.com.
+  • Audit log entry appended (action = REGISTER, actor = anonymous → test.user).
+
+Actual Result:
+  • (fill after execution)
+
+Status:
+  • Pass / Fail
+
+Comment:
+  • On failure, capture console logs, network trace, and server error ID.
+</pre>
+        `
+      },
+
+      /* =========================
+         BUG REPORTS: Detailed
+      ==========================*/
+      "br_detail": {
+        title: "Bug Report — Detailed Explanation",
+        html: `
+<p><strong>Definition.</strong> A bug (defect) is a deviation between expected and actual behavior under specified conditions.</p>
+
+<p><strong>Detection Methods.</strong> Static (reviews, linting), Dynamic (manual/automated execution), and Tool-assisted (E2E, API, performance, security).</p>
+
+<p><strong>Core Fields.</strong></p>
+<ul>
+  <li><strong>Title</strong> – Specific, observable symptom (avoid vague “doesn’t work”).</li>
+  <li><strong>Priority</strong> – Business urgency (High/Medium/Low) — drives scheduling.</li>
+  <li><strong>Severity</strong> – Technical impact (Blocker/Critical/Major/Minor/Cosmetic).</li>
+  <li><strong>Environment</strong> – App version, build, OS/Browser, device, network, feature flags.</li>
+  <li><strong>Preconditions</strong> – State required to reproduce (seed data, auth state).</li>
+  <li><strong>Steps to Reproduce</strong> – Minimal, ordered steps from a clean state.</li>
+  <li><strong>Expected vs Actual</strong> – Contrast what should happen with what did happen.</li>
+  <li><strong>Evidence</strong> – Screenshots, HAR, logs, stack traces, DB snapshots.</li>
+  <li><strong>Status</strong> – New, Assigned, Open, Fixed, Pending Test, Retest, Verified, Closed, Deferred, Reopened.</li>
+  <li><strong>Links</strong> – Related test case IDs, commits, PRs, requirement IDs.</li>
+</ul>
+
+<p><strong>Priority × Severity Guidance.</strong> A Critical/High issue with no workaround should preempt planning; Cosmetic/Low can batch.</p>
+
+<p><strong>Reporting Tips.</strong> Reproducible, isolated, with exact data/time; avoid bundling multiple defects; prefer active voice and observable facts.</p>
+        `
+      },
+
+      /* =========================
+         BUG REPORTS: Example
+      ==========================*/
+      "br_example": {
+        title: "Bug Report — Example (Registration: Wrong Validation)",
+        html: `
+<pre style="white-space:pre-wrap; line-height:1.5; font-family:ui-monospace, SFMono-Regular, Menlo, monospace;">
+Title:
+  Registration accepts 7-digit password though policy requires exactly 8 digits
+
+Priority:
+  Medium
+
+Severity:
+  Major
+
+Environment:
+  Web (Local) — Chrome 126, macOS 14.5
+  Backend: Flask dev server (http://127.0.0.1:5002)
+  DB: sqlite qa_portal.db (fresh seed)
+
+Preconditions:
+  • No existing user with email: policy.check@example.com
+
+Steps to Reproduce:
+  1) Navigate to /register.
+  2) Enter Name = "Policy Check".
+  3) Enter Email = policy.check@example.com.
+  4) Enter Password = 1234567  (7 digits).
+  5) Click "Create Account".
+
+Expected Result:
+  • Client-side + server-side validation reject the password length
+    with message: "Password must be exactly 8 digits".
+
+Actual Result:
+  • Registration succeeds; user is created and redirected to Login.
+
+Notes / Evidence:
+  • Attach console.log, network request/response, and DB row snapshot if present.
+
+Status:
+  New
+
+Links:
+  • Related Test Case: TC-REG-001 (happy path)
+</pre>
+        `
+      }
+    };
+
+    const node = map[kind];
+    if(!node){ console.error("Unknown kind:", kind); return; }
+
+    document.getElementById('learnPopupTitle').textContent = node.title;
+    document.getElementById('learnPopupBody').innerHTML = node.html;
+    document.getElementById('learnPopupOverlay').style.display = 'flex';
+  }
+
+  function closeLearnPopup(){
+    const ov = document.getElementById('learnPopupOverlay');
+    if(ov) ov.style.display = 'none';
+  }
+
+// ===== Unified Side Review Popup (TC + BR) =====
+
+// فتح البوب-أب: entity = 'tc' أو 'br'
+function openSideReview(entity, id, current = {}) {
+  // منع تكرار
+  document.querySelector('.side-review-overlay')?.remove();
+
+  const title = entity === 'tc' ? 'Review Test Case' : 'Review Bug Report';
+  const overlay = document.createElement('div');
+  overlay.className = 'side-review-overlay';
+  overlay.innerHTML = `
+    <div class="side-review">
+      <div class="sr-header">
+        <h3 style="margin:0">${title}</h3>
+        <button class="sr-close" onclick="closeSideReview()">×</button>
+      </div>
+
+      <!-- A) Radios أولاً -->
+      <div class="sr-group">
+        <label style="display:block;margin-bottom:6px;">Status</label>
+        <label><input type="radio" name="sr_status" value="Approved"> Approved</label><br>
+        <label><input type="radio" name="sr_status" value="Rejected"> Rejected</label><br>
+        <label><input type="radio" name="sr_status" value="Need to Fix"> Need to Fix</label>
+      </div>
+
+      <!-- ثم خانة التعليق -->
+      <div class="sr-group">
+        <label style="display:block;margin-bottom:6px;">Comment</label>
+        <textarea id="sr_comment" placeholder="Write comment..." style="width:100%;height:110px;resize:vertical"></textarea>
+      </div>
+
+      <div class="sr-actions">
+        <button class="btn ok" onclick="submitSideReview('${entity}', ${id})">Submit</button>
+        <button class="btn warn" onclick="closeSideReview()">Cancel</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  // Prefill لو حاب مستقبلاً
+  if (current.review_status) {
+    const r = document.querySelector(`input[name="sr_status"][value="${current.review_status}"]`);
+    if (r) r.checked = true;
+  }
+  if (current.review_comment) {
+    document.getElementById('sr_comment').value = current.review_comment;
+  }
+}
+
+function closeSideReview(){
+  document.querySelector('.side-review-overlay')?.remove();
+}
+
+async function submitSideReview(entity, id){
+  const box = (entity === 'tc') ? document.getElementById('tcAlert') : document.getElementById('brAlert');
+  const statusEl = document.querySelector('input[name="sr_status"]:checked');
+  const comment = (document.getElementById('sr_comment').value || '').trim();
+
+  if(!statusEl){ showAlert(box || document.getElementById('authAlert'), 'Select a status','warn'); return; }
+  if(!comment){ showAlert(box || document.getElementById('authAlert'), 'Comment is required','warn'); return; }
+
+  // endpoint
+  const url = entity === 'tc'
+    ? `http://127.0.0.1:5002/review_testcase/${id}`
+    : `http://127.0.0.1:5002/review_bugreport/${id}`;
+
+  const payload = { review_status: statusEl.value, review_comment: comment };
+
+  try {
+    const res = await fetch(url, {
+      method:'PUT',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+
+    // Fallback: نخزن آخر رڤيو محلياً لو السيرفر تعبان
+    if (!data || data.ok === false) {
+      saveReviewLocally(entity, id, payload);
+    }
+
+    showAlert(box || document.getElementById('authAlert'), (data && (data.message||data.msg)) || 'Review saved', 'ok');
+
+    closeSideReview();
+
+    // إعادة تحميل القوائم
+    if (entity === 'tc') {
+      await loadFromBackend?.();
+    } else {
+      await loadBugReports?.();
+    }
+  } catch (e) {
+    // في حالة انقطاع
+    saveReviewLocally(entity, id, payload);
+    showAlert(box || document.getElementById('authAlert'), 'Saved locally (offline). Will sync later.', 'warn');
+    closeSideReview();
+  }
+}
+
+// تخزين محلي بسيط كـ fallback
+function saveReviewLocally(entity, id, payload){
+  const key = entity === 'tc' ? 'offline_tc_reviews' : 'offline_br_reviews';
+  const list = JSON.parse(localStorage.getItem(key) || '[]');
+  // احذف القديم لنفس العنصر لو موجود
+  const filtered = list.filter(x => x.id !== id);
+  filtered.push({ id, ...payload, ts: Date.now() });
+  localStorage.setItem(key, JSON.stringify(filtered));
+}
+
+// محاولة مزامنة عند فتح الداشبورد (اختياري؛ استدعِها بعد تسجيل الدخول)
+async function syncLocalReviews(){
+  const pairs = [
+    { key:'offline_tc_reviews', entity:'tc', url:(id)=>`http://127.0.0.1:5002/review_testcase/${id}`, reload: ()=>loadFromBackend?.() },
+    { key:'offline_br_reviews', entity:'br', url:(id)=>`http://127.0.0.1:5002/review_bugreport/${id}`, reload: ()=>loadBugReports?.() },
+  ];
+  for (const p of pairs){
+    const list = JSON.parse(localStorage.getItem(p.key) || '[]');
+    if (!list.length) continue;
+    const kept = [];
+    for (const it of list){
+      try{
+        const res = await fetch(p.url(it.id), {
+          method:'PUT',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ review_status: it.review_status, review_comment: it.review_comment })
+        });
+        const data = await res.json();
+        if (!data || data.ok === false) kept.push(it); // بقيت محلي
+      }catch(_){ kept.push(it); }
+    }
+    localStorage.setItem(p.key, JSON.stringify(kept));
+    await p.reload();
+  }
+}
+function openInfoPopup(){
+  // أخفي كل التابات
+  document.querySelectorAll('.tab').forEach(t => t.style.display = 'none');
+  
+  // أخفي التاب النشط من الأزرار
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+  // أظهر كارد المعلومات
+  document.getElementById('infoCard').style.display = 'block';
+}
+function closeInfo(){
+  document.getElementById('infoPopup').style.display = 'none';
+  localStorage.setItem("infoSeen","true");
+}
+function openInfoPopup(){
+  alert("Info button clicked ");
+}
+
+</script>
+
+<!-- Generic Learn Popup -->
+<div id="learnPopupOverlay" class="popup-overlay">
+  <div class="popup">
+    <h3 id="learnPopupTitle"></h3>
+    <div id="learnPopupBody" style="max-height:60vh; overflow:auto;"></div>
+    <button onclick="closeLearnPopup()">Close</button>
+<div id="infoPopup" class="popup-overlay" style="display:none;">
+  <div class="popup-content" style="max-width:900px;">
+    <h2 style="font-size:3.6em; font-weight:700; color:#102c5b;">Welcome to QA Training Portal</h2>
+    <p style="line-height:1.6;">
+      This portal allows trainees to practice QA workflows:
+      <br>– Add & review Test Cases
+      <br>– Report & track Bug Reports
+      <br>– Admins can review and approve submissions 
+    </p>
+    <p style="font-size:1.9em;color:#666;">
+      You can navigate using the top tabs at any time.
+    </p>
+    <div class="row" style="margin-top:15px;gap:10px;">
+      <button class="btn ok" onclick="closeInfo()">Got it</button>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+
+<script>
+// ========== QUIZ DATA ==========
+/* ================= QUIZ DATA ================= */
+const quizQuestions = [
+  {
+    q: "What does CTFL stand for?",
+    options: ["Certified Tester Foundation Level", "Core Testing Fundamentals", "Common Test Framework Language"],
+    answer: 0,
+    explanation: "CTFL stands for Certified Tester Foundation Level, a global certification for software testers."
+  },
+  {
+    q: "Which is a black-box test technique?",
+    options: ["Decision Table", "Branch Coverage", "Statement Coverage"],
+    answer: 0,
+    explanation: "Decision Table is a black-box technique; the others are white-box coverage measures."
+  },
+  {
+    q: "What is the main purpose of a Test Case?",
+    options: ["Verify functionality", "Decorate design", "Document meetings"],
+    answer: 0,
+    explanation: "A Test Case verifies that functionality behaves as expected under specific conditions."
+  },
+  {
+    q: "What is Regression Testing?",
+    options: [
+      "Testing new features only",
+      "Re-testing to ensure unchanged areas still work correctly",
+      "Testing without documentation"
+    ],
+    answer: 1,
+    explanation: "Regression testing ensures that existing functionality has not been broken by recent changes."
+  },
+  {
+    q: "Which is a key benefit of Early Testing?",
+    options: [
+      "Reduces overall cost of fixing defects",
+      "Increases design complexity",
+      "Delays project timelines"
+    ],
+    answer: 0,
+    explanation: "Early Testing helps detect defects early, reducing total project cost."
+  },
+  {
+    q: "What is the purpose of a Test Plan?",
+    options: [
+      "Define test strategy and resources",
+      "Write code structure",
+      "Describe UI components only"
+    ],
+    answer: 0,
+    explanation: "A Test Plan outlines the overall test strategy, scope, approach, and resource allocation."
+  },
+  {
+    q: "Which level of testing focuses on interactions between components?",
+    options: ["Unit Testing", "Integration Testing", "Acceptance Testing"],
+    answer: 1,
+    explanation: "Integration Testing verifies that combined components work correctly together."
+  },
+  {
+    q: "Which document includes expected results?",
+    options: ["Test Case", "Bug Report", "User Story"],
+    answer: 0,
+    explanation: "Expected results are part of a Test Case, not a bug report or user story."
+  },
+  {
+    q: "What is the main purpose of Acceptance Testing?",
+    options: [
+      "Verify system meets user needs",
+      "Test internal code logic",
+      "Check hardware compatibility only"
+    ],
+    answer: 0,
+    explanation: "Acceptance Testing confirms that the system meets business/user requirements."
+  },
+  {
+    q: "Which technique belongs to Black-Box Testing?",
+    options: ["Equivalence Partitioning", "Code Review", "Branch Coverage"],
+    answer: 0,
+    explanation: "Equivalence Partitioning is a black-box technique; the others are white-box or static."
+  },
+
+  /* CUSTOM QUESTIONS */
+
+  {
+    q: "Is software testing considered part of QA or QC?",
+    options: [
+      "Quality Assurance (QA)",
+      "Quality Control (QC)",
+      "Both QA and QC"
+    ],
+    answer: 1,
+    explanation: "Testing is part of QC because it evaluates the final product to find defects."
+  },
+  {
+    q: "Which comes first: Verification or Validation?",
+    options: [
+      "Validation comes first",
+      "Verification comes first",
+      "Both start at the same time"
+    ],
+    answer: 1,
+    explanation: "Verification comes first—it checks work products before Validation checks the final system."
+  },
+  {
+    q: "Which describes a 'Failure'?",
+    options: [
+      "A mistake made by a developer",
+      "A deviation between expected and actual behavior",
+      "A flaw in code before execution"
+    ],
+    answer: 1,
+    explanation: "A failure is an incorrect behavior during execution; a defect exists before execution."
+  },
+  {
+    q: "What is the purpose of Smoke Testing?",
+    options: [
+      "Evaluate overall system performance",
+      "Ensure major functions work before deeper testing",
+      "Test security vulnerabilities"
+    ],
+    answer: 1,
+    explanation: "Smoke Testing ensures critical functions work before detailed testing begins."
+  },
+  {
+    q: "Static Testing mainly relies on:",
+    options: [
+      "Executing the code",
+      "Reviewing documents without execution",
+      "Running performance scripts"
+    ],
+    answer: 1,
+    explanation: "Static Testing analyzes documents, code, and requirements without executing the software."
+  }
+];
+
+/* ============ STATE ============ */
+let currentQ = 0;
+let score = 0;
+
+/* ============ START QUIZ ============ */
+function startQuiz() {
+    currentQ = 0;
+
+    // اخفاء اللوقو
+    document.getElementById("fixedLogo")?.classList.add("hide");
+
+    showQuizQuestion();
+}
+
+/* ============ SHOW QUESTION POPUP ============ */
+function showQuizQuestion() {
+  const q = quizQuestions[currentQ];
+
+  const overlay = document.createElement("div");
+  overlay.className = "side-popup-overlay";
+
+  overlay.innerHTML = `
+    <div class="side-popup">
+        <h3 style="color:#102c5b; font-size:20px; font-weight:700; margin-bottom:10px;">
+            CTFL Practice Question
+        </h3>
+
+        <h2 class="quiz-question" style="color:#0a3a80; margin-bottom:15px;">
+            ${q.q}
+        </h2>
+
+        ${q.options
+          .map((opt, i) => 
+            `<div class="quiz-option" onclick="checkQuizAnswer(${i})">${opt}</div>`
+          )
+          .join("")}
+
+        <button class="close-btn" onclick="closeQuizPopup()">Close</button>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+}
+
+/* ============ CHECK ANSWER ============ */
+function checkQuizAnswer(i) {
+  const q = quizQuestions[currentQ];
+
+  if (i === q.answer) score++;
+
+  const overlay = document.querySelector(".side-popup-overlay");
+
+  overlay.innerHTML = `
+    <div class="side-popup">
+        <h2>${i === q.answer ? "Correct " : "Wrong "}</h2>
+        <p style="margin: 15px 0; font-size:16px;">${q.explanation}</p>
+        <button onclick="nextQuiz()" class="close-btn">Next</button>
+    </div>
+  `;
+}
+
+/* ============ NEXT QUESTION ============ */
+function nextQuiz() {
+  currentQ++;
+
+  if (currentQ >= quizQuestions.length) {
+    showQuizScore();
+    return;
+  }
+
+  const old = document.querySelector(".side-popup-overlay");
+  if (old) old.remove();
+
+  showQuizQuestion();
+}
+
+/* ============ SHOW FINAL SCORE ============ */
+function showQuizScore() {
+  const overlay = document.querySelector(".side-popup-overlay");
+  const total = quizQuestions.length;
+  const percent = Math.round((score / total) * 100);
+
+  overlay.innerHTML = `
+    <div class="side-popup">
+        <h2>Quiz Completed </h2>
+        <p style="font-size:18px; font-weight:600; margin-bottom:15px;">
+            You scored ${score} / ${total} (${percent}%)
+        </p>
+        <button class="close-btn" onclick="closeQuizPopup()">Close</button>
+    </div>
+  `;
+}
+
+/* ============ CLOSE POPUP ============ */
+function closeQuizPopup() {
+    const old = document.querySelector(".side-popup-overlay");
+    if (old) old.remove();
+
+    // إرجاع اللوقو
+    document.getElementById("fixedLogo")?.classList.remove("hide");
+}
+
+/* ============ BUTTON LISTENER ============ */
+document.getElementById("quizBtn").addEventListener("click", startQuiz);
+</script>
+</body>
+</html>
