@@ -1,12 +1,21 @@
-# Quality Hub 🧪
+# Quality Hub 
 
-Quality Hub is a web-based QA Training Portal designed to help new testers practice real-world software testing tasks.
+Quality Hub is a web-based QA Training Portal that simulates real-world testing tasks, helping users practice test case design, bug reporting, and QA workflows.
 
 ## Features
 - User Authentication (Login / Register)
+- Role-Based Access (User / Admin)
 - Test Cases Management
 - Bug Reporting System
+- Admin Review System (Approve / Reject submissions)
+- Interactive Quiz (ISTQB-based)
 - QA Learning Resources
+
+## Interactive Quiz
+Includes an interactive quiz based on ISTQB concepts to help users test their understanding of software testing fundamentals.
+
+## Admin Review System
+Implements a review workflow where admins can evaluate submitted test cases and bug reports, approving or rejecting them to maintain quality standards.
 
 ## Technologies Used
 - Flask (Python)
