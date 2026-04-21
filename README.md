@@ -1,63 +1,71 @@
-# Quality Hub 
+# Quality Hub
 
-Quality Hub is a web-based QA Training Portal that simulates real-world testing tasks, helping users practice test case design, bug reporting, and QA workflows.
+Quality Hub is a web-based QA Training Portal that simulates real-world testing tasks.  
+It allows users to practice test case design, bug reporting, and QA workflows through a simple backend API.
+
+---
 
 ## Features
-- User Authentication (Login / Register)
-- Role-Based Access (User / Admin)
-- Test Cases Management
+
+- User Authentication (Register / Login)
+- JWT-based Authentication
+- Role-based Access (User / Admin)
+- Test Cases Management (Add / Edit / Delete)
 - Bug Reporting System
-- Admin Review System (Approve / Reject submissions)
-- Interactive Quiz (ISTQB-based)
-- QA Learning Resources
+- Admin Review System
+- API Testing using Postman
 
-## Interactive Quiz
-Includes an interactive quiz based on ISTQB concepts to help users test their understanding of software testing fundamentals.
+---
 
-## Admin Review System
-Implements a review workflow where admins can evaluate submitted test cases and bug reports, approving or rejecting them to maintain quality standards.
+## Security
+
+The application uses JSON Web Tokens (JWT) for securing API endpoints.
+
+- A token is generated after successful login
+- Protected endpoints require a valid Bearer Token
+- Requests without token return 401 Unauthorized
+- Expired or invalid tokens are handled properly
+
+---
+
+## API Testing
+
+API testing was performed using Postman with the following scenarios:
+
+- Valid login returns 200 OK
+- Invalid login returns 401 Unauthorized
+- Authorized requests with token succeed
+- Unauthorized requests without token are rejected
+
+---
+
+## Screenshots
+
+### Login Success
+![Login Success](screenshots/login-success.png)
+
+### Invalid Login
+![Invalid Login](screenshots/login-invalid.png)
+
+### Add Test Case with Token
+![Authorized Request](screenshots/add-testcase-token.png)
+
+### Request Without Token
+![Unauthorized Request](screenshots/no-token.png)
+
+---
 
 ## Technologies Used
-- Flask (Python)
-- HTML, CSS, JavaScript
-- SQLite
 
-## Project Structure
-quality-hub/
-│
-├── app.py
-├── database.py
-├── requirements.txt
-├── .gitignore
-│
-├── templates/
-│   └── index.html
-│
-├── static/
-│   └── images/
-│       └── quality-logo.png
+- Python (Flask)
+- SQLite
+- PyJWT
+- Postman
+
+---
 
 ## How to Run
-1. Install requirements:
+
+```bash
 pip install -r requirements.txt
-
-2. Run the project:
 python app.py
-
-3. Open browser:
-http://127.0.0.1:5000
-
-## API Testing (Postman)
-
-This project includes API testing using Postman.
-
-The collection covers:
-- Authentication APIs (Register / Login)
-- Test Cases APIs (Add / Get)
-- Bug Reporting APIs (Add / Get / Edit / Delete)
-
-Collection file:
-postman/quality-hub-api-tests.json
-
-## Author
-Latifa Alanazi
