@@ -1,0 +1,258 @@
+{
+  "info": {
+    "_postman_id": "6a252015-e501-4366-becc-2a5ab8862e8a",
+    "name": "QA Traning portal",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "49216061",
+    "_collection_link": "https://go.postman.co/collection/49216061-6a252015-e501-4366-becc-2a5ab8862e8a?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth-Register User",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Latifa Test\",\n  \"email\": \"latifa.test1@jodayn.com\",\n  \"password\": \"12345698\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:5002/register",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "5002",
+          "path": [
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Auth-Login User",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"test1@gmail.com\",\n  \"password\": \"12345678\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:5002/login",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "5002",
+          "path": [
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-Add Test Case",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"module\": \"Authentication\",\n  \"tcid\": \"TC010\",\n  \"actor\": \"Admin User\",\n  \"steps\": \"Open the login page and enter valid data\",\n  \"expected\": \"User should be logged in successfully\",\n  \"actual\": \"To be tested\",\n  \"reported_by\": \"Latifa\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:5002/add_testcase",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "5002",
+          "path": [
+            "add_testcase"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-Get Test Casa",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:5002/get_testcases",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "5002",
+          "path": [
+            "get_testcases"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Bug-Add Bug Report",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Login button is unresponsive\",\n  \"priority\": \"High\",\n  \"steps\": \"Open login → Fill email + password → Click Login → button does nothing\",\n  \"expected\": \"Login button should trigger validation and login process\",\n  \"actual\": \"Nothing happens\",\n  \"reported_by\": \"Latifa\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:5002/add_bugreport",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "5002",
+          "path": [
+            "add_bugreport"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Bug-Get Bug Report",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:5002/get_bugreports",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "5002",
+          "path": [
+            "get_bugreports"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Bug-Edit Bug Report",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Registration validation bug\",\n  \"priority\": \"Medium\",\n  \"steps\": \"Enter wrong password length -> submit -> system shows correct error message\",\n  \"expected\": \"System should block registration\",\n  \"actual\": \"System blocks properly\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:5002/edit_bugreport/15",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "5002",
+          "path": [
+            "edit_bugreport",
+            "15"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Bug-Delete Bug Report",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:5002/delete_bugreport/15",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "5002",
+          "path": [
+            "delete_bugreport",
+            "15"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

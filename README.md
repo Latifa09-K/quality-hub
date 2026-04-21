@@ -47,5 +47,17 @@ python app.py
 3. Open browser:
 http://127.0.0.1:5000
 
+## API Testing (Postman)
+
+This project includes API testing using Postman.
+
+The collection covers:
+- Authentication APIs (Register / Login)
+- Test Cases APIs (Add / Get)
+- Bug Reporting APIs (Add / Get / Edit / Delete)
+
+Collection file:
+postman/quality-hub-api-tests.json
+
 ## Author
 Latifa Alanazi
