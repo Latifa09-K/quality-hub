@@ -2,13 +2,44 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import sqlite3
 import re
+import jwt
+import datetime
+from functools import wraps
 
 app = Flask(__name__)
 CORS(app)
-
+app.config['SECRET_KEY'] = 'quality_hub_super_secret_key_2026'
 DB_PATH = 'qa_portal.db'
 
+def create_token(user_id, email, role):
+    payload = {
+        "user_id": user_id,
+        "email": email,
+        "role": role,
+        "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=2)
+    }
+    token = jwt.encode(payload, app.config['SECRET_KEY'], algorithm="HS256")
+    return token
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        auth_header = request.headers.get("Authorization", "")
 
+        if not auth_header.startswith("Bearer "):
+            return jsonify({"ok": False, "message": "Token is missing."}), 401
+
+        token = auth_header.split(" ")[1]
+
+        try:
+            data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
+            request.user = data
+        except jwt.ExpiredSignatureError:
+            return jsonify({"ok": False, "message": "Token has expired."}), 401
+        except jwt.InvalidTokenError:
+            return jsonify({"ok": False, "message": "Invalid token."}), 401
+
+        return f(*args, **kwargs)
+    return decorated
 # ================== DB INIT ================== #
 def init_db():
     conn = sqlite3.connect(DB_PATH)
@@ -153,7 +184,6 @@ def register():
     except sqlite3.IntegrityError:
         return jsonify({"ok": False, "message": "Email already registered."}), 409
 
-
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json(force=True)
@@ -161,24 +191,42 @@ def login():
     password = (data.get('password') or '').strip()
 
     if not email or not password:
-        return jsonify({"ok": False, "message": "Please enter email & password."}), 400
+        return jsonify({
+            "ok": False,
+            "message": "Please enter email & password."
+        }), 400
 
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
-    c.execute("SELECT id, name, email, role FROM users WHERE email=? AND password=?", (email, password))
+    c.execute(
+        "SELECT id, name, email, role FROM users WHERE email=? AND password=?",
+        (email, password)
+    )
     row = c.fetchone()
     conn.close()
 
     if not row:
-        return jsonify({"ok": False, "message": "Invalid credentials."}), 401
+        return jsonify({
+            "ok": False,
+            "message": "Invalid credentials."
+        }), 401
 
-    return jsonify({"ok": True, "message": "Login successful", "user": {
-        "id": row[0], "name": row[1], "email": row[2], "role": row[3]
-    }})
+    token = create_token(row[0], row[2], row[3])
 
-
+    return jsonify({
+        "ok": True,
+        "message": "Login successful",
+        "token": token,
+        "user": {
+            "id": row[0],
+            "name": row[1],
+            "email": row[2],
+            "role": row[3]
+        }
+    })
 # ================== TEST CASES ================== #
 @app.route('/add_testcase', methods=['POST'])
+@token_required
 def add_testcase():
     data = request.get_json(force=True)
     conn = sqlite3.connect(DB_PATH)
